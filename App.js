@@ -8,6 +8,7 @@ class App extends Component {
         <Text> Ayad git and github developer </Text>
         <Text> Abdelrahman Ayad git and github developer </Text>
         <Text>Ady Ayad</Text>
+        <Text>--------------</Text>
         <Text>Modify 2</Text>
         <Text>Modify 3</Text>
 
