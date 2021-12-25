@@ -5,7 +5,8 @@ export class App2 extends Component {
   render() {
     return (
       <View>
-        <Text> Ady </Text>
+        <Text> App2 </Text>
+        <Text> Ady Hatem</Text>
       </View>
     );
   }
