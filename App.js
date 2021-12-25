@@ -7,6 +7,7 @@ class App extends Component {
       <View>
         <Text> Ayad git and github developer </Text>
         <Text> Abdelrahman Ayad git and github developer </Text>
+        <Text>Ady Hatem</Text>
       </View>
     );
   }
