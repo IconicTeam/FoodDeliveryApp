@@ -11,6 +11,7 @@ class App extends Component {
         <Text>Modify 3</Text>
 
         <Text>Ady Modified 1</Text>
+        <Text>Ady Modified 2</Text>
       </View>
     );
   }
