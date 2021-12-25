@@ -5,7 +5,7 @@ export default class App extends Component {
   render() {
     return (
       <View>
-        <Text> Ady Hatem </Text>
+        <Text> Abdelraahman Ayad git and github developer </Text>
       </View>
     );
   }
