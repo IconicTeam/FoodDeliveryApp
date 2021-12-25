@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <View>
-        <Text> Abdelraahman Ayad git and github developer </Text>
+        <Text> Ady Hatem git and github developer </Text>
       </View>
     );
   }
