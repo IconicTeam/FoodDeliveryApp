@@ -7,11 +7,7 @@ class App extends Component {
   render() {
     return (
       <View>
-        <Text> Ayad git and github developer </Text>
-        <Text> Abdelrahman Ayad git and github developer </Text>
-        <Text>Ady Hatem</Text>
-        <Icon name="staro" size={50} style={{alignSelf: 'center'}} />
-        <Text style={{fontSize: 25, fontFamily: 'Tajawal'}}>الحب سماء</Text>
+        <Text>Start our project</Text>
       </View>
     );
   }

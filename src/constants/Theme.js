@@ -1,3 +1,43 @@
 export const defaultTheme = {
-  primary: '#00f'
-}
+  primary: '#fb6e3b',
+  background: '#f4f4f4',
+  card: '#ffffff',
+  text: '#1c1c1e',
+  text2: '#202124',
+  icon: '#202124',
+  border: '#cccccc',
+  placeholder: '#636c72',
+  nav: {
+    background: '#ffffff',
+    active: '#fb6e3b',
+    inActive: 'gray',
+  },
+  themeMode: 'default',
+  ripple: 'gray',
+  white: '#ffffff',
+  black: '#222222',
+  selectionColor: '#ffcbb8',
+  error: '#f00f00',
+};
+
+export const darkTheme = {
+  primary: '#fb6e3b',
+  background: '#232931',
+  card: '#393E46',
+  text: '#ffffff',
+  text2: '#eeeeee',
+  icon: '#eeeeee',
+  border: 'gray',
+  placeholder: '#636c72',
+  nav: {
+    background: '#393E46',
+    active: '#fb6e3b',
+    inActive: 'gray',
+  },
+  themeMode: 'dark',
+  ripple: 'gray',
+  white: '#ffffff',
+  black: '#222222',
+  selectionColor: '#ffcbb8',
+  error: '#f00f00',
+};
