@@ -11,7 +11,7 @@ class App extends Component {
         <Text> Abdelrahman Ayad git and github developer </Text>
         <Text>Ady Hatem</Text>
         <Icon name="staro" size={50} style={{alignSelf: 'center'}} />
-        <Text style={{fontSize: 25, fontFamily: 'ArabicFont'}}>الحب سماء</Text>
+        <Text style={{fontSize: 25, fontFamily: 'Tajawal'}}>الحب سماء</Text>
       </View>
     );
   }
