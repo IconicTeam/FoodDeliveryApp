@@ -18,6 +18,7 @@ export const defaultTheme = {
   black: '#222222',
   selectionColor: '#ffcbb8',
   error: '#f00f00',
+  gray: 'gray',
 };
 
 export const darkTheme = {
@@ -40,4 +41,5 @@ export const darkTheme = {
   black: '#222222',
   selectionColor: '#ffcbb8',
   error: '#f00f00',
+  gray: 'gray',
 };
