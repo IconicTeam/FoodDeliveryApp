@@ -23,7 +23,7 @@ export class SplashScreen extends Component {
       } else if (switchNav == 'Auth') {
         this.props.navigation.replace('AuthStack');
       }
-    }, 2000);
+    }, 3000);
   }
 
   render() {

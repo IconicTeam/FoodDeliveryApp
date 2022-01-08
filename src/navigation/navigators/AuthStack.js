@@ -3,15 +3,15 @@ import {Text, View} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Login from '../../screens/Login';
+import LoginScreen from '../../screens/auth/LoginScreen';
 
 const Stack = createStackNavigator();
 
 export class AuthStack extends Component {
   render() {
     return (
-      <Stack.Navigator>
-        {/* <Stack.Screen name="Login" component={Login} /> */}
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
       </Stack.Navigator>
     );
   }
