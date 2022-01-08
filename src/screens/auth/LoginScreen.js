@@ -16,7 +16,7 @@ import {TextInput} from 'react-native-paper';
 import GeneralButton from '../../components/GeneralButton';
 const {width, height} = Dimensions.get('screen');
 const {largeFont} = SIZES.largeFontSize;
-export class Login extends Component {
+class LoginScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -241,4 +241,4 @@ const styles = StyleSheet.create({
     borderRadius: height * 0.03,
   },
 });
-export default Login;
+export default LoginScreen;
