@@ -18,7 +18,11 @@ export class SplashScreen extends Component {
   async componentDidMount() {
     let switchNav = await AsyncStorage.getItem('switch'); // || "IntroSlider";
     setTimeout(() => {
-      if (switchNav == null || switchNav == undefined) {
+      if (
+        switchNav == null ||
+        switchNav == undefined ||
+        switchNav == 'IntroSlider'
+      ) {
         this.props.navigation.replace('IntroSliderScreen');
       } else if (switchNav == 'Auth') {
         this.props.navigation.replace('AuthStack');

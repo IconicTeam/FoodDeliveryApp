@@ -361,7 +361,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Tajawal',
   },
   descriptionSlideText: {
-    fontSize: SIZES.smallFontSize,
+    fontSize: SIZES.mediumFontSize,
     textAlign: 'center',
     fontFamily: 'Tajawal',
   },

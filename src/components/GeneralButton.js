@@ -8,7 +8,7 @@ export class GeneralButton extends Component {
     return (
       <>
         <TouchableOpacity
-          activeOpacity={0.6}
+          activeOpacity={0.4}
           style={[
             styles.loginBT,
             {

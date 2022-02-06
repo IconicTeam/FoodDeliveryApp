@@ -7,6 +7,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Button,
+  AsyncStorage,
 } from 'react-native';
 import {SIZES, PADDING} from '../../constants/Constants';
 import {Checkbox} from 'react-native-paper';
@@ -32,6 +34,13 @@ class LoginScreen extends Component {
           {/* View 1 */}
           <View style={styles.view1}>
             <Text style={styles.textTitle}>تسجيل الدخول</Text>
+            <Button
+              title="introSlider"
+              onPress={async () => {
+                this.props.navigation.replace('IntroSliderScreen');
+                await AsyncStorage.setItem('switch', 'IntroSlider');
+              }}
+            />
           </View>
           {/* View 2 */}
           <View style={styles.view2}>
@@ -121,7 +130,7 @@ class LoginScreen extends Component {
             </View>
             <View style={styles.iconsStyle}>
               <TouchableOpacity
-                activeOpacity={0.5}
+                activeOpacity={0.4}
                 style={{
                   width: width * 0.08,
                   height: height * 0.036,
@@ -132,13 +141,13 @@ class LoginScreen extends Component {
                 }}>
                 <Icon name="facebook" size={height * 0.024} color={'#fff'} />
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.5} style={styles.iconView}>
+              <TouchableOpacity activeOpacity={0.4} style={styles.iconView}>
                 <Image
                   source={require('../../assets/images/google.png')}
                   style={{width: '100%', height: '100%'}}
                 />
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.5} style={styles.iconView}>
+              <TouchableOpacity activeOpacity={0.4} style={styles.iconView}>
                 <Icon name="twitter" size={height * 0.03} color={'#5da9dd'} />
               </TouchableOpacity>
             </View>
