@@ -1,14 +1,25 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
-export class GeneralButton extends Component {
+class GeneralButton extends Component {
   render() {
-    const {title, BGcolor, width, height, textColor, haveBorder, textSize} =
-      this.props;
+    const {
+      title,
+      BGcolor,
+      width,
+      height,
+      textColor,
+      haveBorder,
+      textSize,
+      onPress,
+    } = this.props;
+
+    // console.log('render');
     return (
       <>
         <TouchableOpacity
           activeOpacity={0.4}
+          onPress={onPress}
           style={[
             styles.loginBT,
             {
@@ -38,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GeneralButton;
+export default React.memo(GeneralButton);
