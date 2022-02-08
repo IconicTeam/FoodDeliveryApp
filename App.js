@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 import LoginScreen from './src/screens/auth/LoginScreen';
 import NewPassword from './src/screens/auth/NewPassword';
+import OneTimePassword from './src/screens/auth/OneTimePassword';
 
 import SplashScreen from './src/screens/SplashScreen';
 import IntroSliderScreen from './src/screens/IntroSliderScreen';
@@ -15,7 +16,7 @@ class App extends Component {
     return (
       <>
         {/* <ContainerNavigation></ContainerNavigation> */}
-        <NewPassword />
+        <OneTimePassword/>
       </>
     );
   }
