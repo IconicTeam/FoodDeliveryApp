@@ -3,7 +3,7 @@ import {Text, View} from 'react-native';
 import LoginScreen from './src/screens/auth/LoginScreen';
 import NewPassword from './src/screens/auth/NewPassword';
 import OneTimePassword from './src/screens/auth/OneTimePassword';
-
+import Home from './src/screens/home/Home ';
 import SplashScreen from './src/screens/SplashScreen';
 import IntroSliderScreen from './src/screens/IntroSliderScreen';
 
@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <>
         {/* <ContainerNavigation></ContainerNavigation> */}
-        <OneTimePassword/>
+        <Home/>
       </>
     );
   }
