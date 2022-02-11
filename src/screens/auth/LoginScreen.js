@@ -9,6 +9,7 @@ import {
   Image,
   Button,
   AsyncStorage,
+  StatusBar,
 } from 'react-native';
 import {SIZES, PADDING} from '../../constants/Constants';
 import {Checkbox} from 'react-native-paper';
@@ -16,19 +17,25 @@ import Icon from 'react-native-vector-icons/Fontisto';
 import Icon2 from 'react-native-vector-icons/Feather';
 import {TextInput} from 'react-native-paper';
 import GeneralButton from '../../components/GeneralButton';
+import {defaultTheme} from '../../constants/Theme';
 const {width, height} = Dimensions.get('screen');
-const {largeFont} = SIZES.largeFontSize;
+
+const activeOpacity = 0.4;
+
 class LoginScreen extends Component {
   constructor() {
     super();
     this.state = {
       checked: false,
+      renderTimes: 0,
     };
   }
 
+  goToLoginScreen = () => this.props.navigation.navigate('SignupScreen');
+
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{flex: 1}}>
         {/* View container */}
         <View style={styles.container}>
           {/* View 1 */}
@@ -87,6 +94,7 @@ class LoginScreen extends Component {
                       style={{
                         fontFamily: 'Tajawal',
                         fontSize: SIZES.smallFontSize,
+                        color: defaultTheme.gray,
                       }}>
                       تذكرني؟
                     </Text>
@@ -102,13 +110,15 @@ class LoginScreen extends Component {
 
             <GeneralButton
               width={width * 0.5}
-              height={height * 0.07}
+              height={height * 0.065}
               title="تسجيل"
               BGcolor="#fb6e3b"
               textColor="#ffffff"
               textSize={SIZES.mediumFontSize}
               haveBorder={false}
+              onPress={() => {}}
             />
+
             <View
               style={{
                 alignItems: 'center',
@@ -121,16 +131,19 @@ class LoginScreen extends Component {
                   marginHorizontal: width * 0.01,
                   alignItems: 'center',
                   fontFamily: 'Tajawal',
+                  color: defaultTheme.gray,
                 }}>
                 ليس لديك حساب؟
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={this.goToLoginScreen}
+                activeOpacity={activeOpacity}>
                 <Text style={styles.textPass2}>إنشاء حساب</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.iconsStyle}>
               <TouchableOpacity
-                activeOpacity={0.4}
+                activeOpacity={activeOpacity}
                 style={{
                   width: width * 0.08,
                   height: height * 0.036,
@@ -141,13 +154,17 @@ class LoginScreen extends Component {
                 }}>
                 <Icon name="facebook" size={height * 0.024} color={'#fff'} />
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.4} style={styles.iconView}>
+              <TouchableOpacity
+                activeOpacity={activeOpacity}
+                style={styles.iconView}>
                 <Image
                   source={require('../../assets/images/google.png')}
                   style={{width: '100%', height: '100%'}}
                 />
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.4} style={styles.iconView}>
+              <TouchableOpacity
+                activeOpacity={activeOpacity}
+                style={styles.iconView}>
                 <Icon name="twitter" size={height * 0.03} color={'#5da9dd'} />
               </TouchableOpacity>
             </View>
@@ -159,8 +176,7 @@ class LoginScreen extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    width: width,
-    height: height * 0.95,
+    flex: 1,
     backgroundColor: '#fb6e3b',
     justifyContent: 'flex-end',
   },
@@ -172,7 +188,7 @@ const styles = StyleSheet.create({
   },
   view2: {
     width: width,
-    height: height * 0.7,
+    height: height * 0.75 - StatusBar.currentHeight,
     backgroundColor: '#ffffff',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
