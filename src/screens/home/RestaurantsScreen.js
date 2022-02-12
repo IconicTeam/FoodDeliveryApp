@@ -294,7 +294,13 @@ class Restaurants extends Component {
       <View style={styles.restaurantContainer}>
         <TouchableOpacity
           style={styles.imageCoverContainer}
-          activeOpacity={0.4}>
+          activeOpacity={0.4}
+          onPress={() =>
+            this.props.navigation.navigate('RestaurantScreen', {
+              restaurant: item,
+              restaurant_index: index, // if we need it
+            })
+          }>
           <Image
             source={{uri: item.rest_cover_image}}
             resizeMode="cover"
