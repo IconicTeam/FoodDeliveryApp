@@ -31,7 +31,11 @@ class LoginScreen extends Component {
     };
   }
 
+  // go to signup screen
   goToLoginScreen = () => this.props.navigation.navigate('SignupScreen');
+
+  // go to signup screen
+  goToHome = () => this.props.navigation.navigate('BottomTabs');
 
   render() {
     return (
@@ -112,11 +116,11 @@ class LoginScreen extends Component {
               width={width * 0.5}
               height={height * 0.065}
               title="تسجيل"
-              BGcolor="#fb6e3b"
-              textColor="#ffffff"
+              BGcolor={defaultTheme.primary}
+              textColor={defaultTheme.white}
               textSize={SIZES.mediumFontSize}
               haveBorder={false}
-              onPress={() => {}}
+              onPress={this.goToHome}
             />
 
             <View

@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/bottom-tabs": "^5.11.15",
     "@react-navigation/native": "^5.9.8",
     "@react-navigation/stack": "^5.14.9",
     "lottie-react-native": "^5.0.1",
@@ -29,6 +30,7 @@
     "react-native-reanimated": "^2.3.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
+    "react-native-svg": "^12.1.1",
     "react-native-textinput-effects": "^0.6.2",
     "react-native-vector-icons": "^9.0.0"
   },

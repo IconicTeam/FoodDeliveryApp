@@ -12,8 +12,8 @@ export const FONTS = {
 export const SIZES = {
   tinyFontSize: height * 0.015,
   smallFontSize: height * 0.017,
-  mediumFontSize: height * 0.023,
-  largeFontSize: height * 0.038,
+  mediumFontSize: height * 0.021,
+  largeFontSize: height * 0.032,
   // Icons
   smallIconSize: Math.floor(height * 0.02),
   mediumIconSize: Math.floor(height * 0.03),

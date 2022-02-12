@@ -212,8 +212,8 @@ class SignupScreen extends Component {
   // Take a photo
   takePhoto = () => {
     ImagePicker.openCamera({
-      width: height,
-      height: height,
+      // width: 300,
+      // height: 300,
       cropping: true,
       mediaType: 'photo',
       cropperCircleOverlay: true,
@@ -239,8 +239,8 @@ class SignupScreen extends Component {
   // select photo from gallery
   selectFromGallery = () => {
     ImagePicker.openPicker({
-      width: height,
-      height: height,
+      // width: 300,
+      // height: 300,
       cropping: true,
       mediaType: 'photo',
       cropperCircleOverlay: true,
@@ -399,7 +399,7 @@ class SignupScreen extends Component {
             <Pressable
               android_ripple={{
                 radius: (width * 0.3) / 2,
-                color: defaultTheme.ripple,
+                color: '#ddd',
                 foreground: true,
               }}
               style={[
@@ -417,14 +417,14 @@ class SignupScreen extends Component {
                 <>
                   <Image
                     source={{uri: user_image}}
-                    resizeMode="contain"
+                    // resizeMode="cover"
                     style={styles.selectedUserImage}
                   />
                   <Icon
                     style={{position: 'absolute'}}
                     name="camera"
                     size={SIZES.mediumIconSize}
-                    color={'#eee3'}
+                    color={`${defaultTheme.white}40`}
                   />
                 </>
               )}
@@ -973,7 +973,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   RBSheetTitle: {
-    fontSize: SIZES.mediumFontSize,
+    fontSize: SIZES.largeFontSize,
     fontFamily: FONTS.fontFamily,
   },
   RBSheetBtnsView: {
@@ -1004,7 +1004,7 @@ const styles = StyleSheet.create({
     // borderRadius: height / 2,
   },
   RBSheetSubTitle: {
-    fontSize: SIZES.smallFontSize,
+    fontSize: SIZES.mediumFontSize,
     fontFamily: FONTS.fontFamily,
   },
 });

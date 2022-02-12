@@ -9,8 +9,9 @@ import {
 import {TextInput} from 'react-native-paper';
 
 import React, {Component} from 'react';
-import {SIZES, PADDING} from '../../constants/Constants';
-import GeneralButton from '../../components/GeneralButton';
+
+import GeneralButton from '../../../components/GeneralButton';
+import {SIZES, PADDINGS} from '../../../constants/Constants';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -29,7 +30,7 @@ class NewPassword extends Component {
           <View style={styles.container}>
             <View style={styles.view1}>
               <ImageBackground
-                source={require('../../assets/images/confirm.png')}
+                source={require('../../../assets/images/confirm.png')}
                 style={{
                   width: width * 1,
                   height: height * 0.3,
