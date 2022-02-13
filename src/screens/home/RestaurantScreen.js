@@ -109,8 +109,16 @@ export default class RestaurantScreen extends React.Component {
         },
       ],
       seletedName: '',
+
+      restaurant: {
+        ...this.props.route.params.restaurant,
+      },
     };
   }
+
+  // componentDidMount() {
+  //   console.log(this.state.restaurant);
+  // }
 
   search(item) {
     let list = this.state.products;
@@ -257,7 +265,6 @@ export default class RestaurantScreen extends React.Component {
                                 : defaultTheme.gray,
                             },
                           ]}>
-                          {' '}
                           {catogery.name}
                         </Text>
                       </View>
@@ -327,6 +334,7 @@ const styles = StyleSheet.create({
   },
   imageBackgroundstyle: {
     flex: 1,
+    width: width,
   },
   view2: {
     width: width,

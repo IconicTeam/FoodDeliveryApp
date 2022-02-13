@@ -60,7 +60,7 @@ class LoginScreen extends Component {
                 style={styles.textInputStyle}
                 label={'البريد الالكتروني'}
                 selectionColor="#ffcbb8"
-                underlineColor="#000"
+                underlineColor={defaultTheme.gray}
                 activeUnderlineColor="#fb6e3b"
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -70,7 +70,7 @@ class LoginScreen extends Component {
                   style={styles.textInputStyle}
                   label={'الرقم السري'}
                   selectionColor="#ffcbb8"
-                  underlineColor="#000"
+                  underlineColor={defaultTheme.gray}
                   activeUnderlineColor="#fb6e3b"
                   secureTextEntry
                 />
@@ -104,7 +104,10 @@ class LoginScreen extends Component {
                     </Text>
                   </View>
                   <View>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.props.navigation.navigate('EmailScreen')
+                      }>
                       <Text style={styles.textPass}>نسيت كلمة المرور؟</Text>
                     </TouchableOpacity>
                   </View>

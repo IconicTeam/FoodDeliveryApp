@@ -33,9 +33,11 @@ export default class OneTimePassword extends React.Component {
       count: 0,
     };
   }
+
   componentDidMount = () => {
-    this.refs.Verify_code1ref.focus();
+    this.refs.Verify_code1ref.focus;
   };
+
   completetextinput() {
     let pin1 = this.state.Verify_code1;
     let pin2 = this.state.Verify_code2;
@@ -60,34 +62,36 @@ export default class OneTimePassword extends React.Component {
   }
   render() {
     return (
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.viewcontiner}>
-          <TouchableOpacity style={styles.touchableopicty1}>
+      <View style={styles.viewcontiner}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{flex: 1}}
+          contentContainerStyle={{
+            paddingHorizontal: PADDINGS.padding,
+          }}
+          keyboardShouldPersistTaps={'handled'}>
+          {/* <TouchableOpacity style={styles.touchableopicty1}>
             <FontAwesome5
               name="chevron-right"
               color={'#000'}
               size={SIZES.mediumIconSize}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={styles.view2}>
-            <ImageBackground
+            <Image
               source={require('../../../assets/images/confirm1.png')}
               style={{
-                width: width * 0.5,
-                height: height * 0.3,
-                backgroundColor: defaultTheme.background,
+                width: '100%',
+                height: '100%',
               }}
+              resizeMode="contain"
             />
-            <View style={styles.view1}>
-              <Text style={styles.textstyle1}>قم بتأكيد البريد الإلكتروني</Text>
-            </View>
           </View>
           <View style={styles.view3}>
+            <Text style={styles.textstyle1}>قم بتأكيد البريد الإلكتروني</Text>
             <Text style={styles.textstyle5}>
-              {' '}
-              الرجاء إدخال الرمز المكون من 4 أرقام{' '}
+              الرجاء إدخال الرمز المكون من 4 أرقام المرسل إلي رقم الهاتف
             </Text>
-            <Text style={styles.textstyle5}> المرسل إلي رقم الهاتف </Text>
           </View>
           <View style={styles.view4}>
             <TextInput
@@ -143,9 +147,9 @@ export default class OneTimePassword extends React.Component {
               maxLength={1}
               value={this.state.Verify_code4}
               onChangeText={value => {
-                this.setState({Verify_code4: value, pressIn: false});
+                this.setState({Verify_code4: value});
                 if (value != '') {
-                  alert('تم التاكيد');
+                  this.setState({pressIn: false});
                 } else {
                   this.refs.Verify_code3ref.focus();
                   this.setState({pressIn: true});
@@ -160,26 +164,49 @@ export default class OneTimePassword extends React.Component {
             </TouchableOpacity>
           </View>
           <GeneralButton
-            width={width * 0.5}
-            height={height * 0.07}
+            disabled={this.state.pressIn ? true : false}
+            // width={width * 0.5}
+            // height={height * 0.065}
             title="تأكيد"
             BGcolor={this.state.pressIn ? '#ccc' : '#fb6e3b'}
             textColor="#ffffff"
             textSize={SIZES.mediumFontSize}
             haveBorder={false}
+            otherStyles={{
+              marginVertical: PADDINGS.padding,
+              alignSelf: 'center',
+            }}
+            onPress={() => this.props.navigation.navigate('NewPassword')}
           />
-        </View>
-      </ScrollView>
+        </ScrollView>
+
+        {/* Back Button */}
+        <TouchableOpacity
+          activeOpacity={0.4}
+          style={{
+            width: 40,
+            height: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 15,
+            backgroundColor: defaultTheme.card,
+            elevation: 2,
+            position: 'absolute',
+            margin: PADDINGS.padding,
+            left: 0,
+            top: 0,
+          }}
+          onPress={() => this.props.navigation.goBack()}>
+          <FontAwesome5 name="chevron-right" size={SIZES.mediumIconSize} />
+        </TouchableOpacity>
+      </View>
     );
   }
 }
 const styles = StyleSheet.create({
   viewcontiner: {
-    width: width,
-    height: height,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    padding: PADDINGS.smallPadding,
+    flex: 1,
+    backgroundColor: defaultTheme.white,
   },
   touchableopicty1: {
     width: 40,
@@ -199,36 +226,35 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   textstyle1: {
-    fontSize: 30,
+    fontSize: SIZES.largeFontSize,
     color: '#000',
     fontFamily: 'Tajawal',
+    textAlign: 'center',
   },
   view2: {
     width: width,
     height: height * 0.3,
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 10,
+    marginBottom: PADDINGS.padding,
+    marginTop: height * 0.07,
   },
   view3: {
-    width: width * 0.9,
-    height: height * 0.06,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10,
+    width: '100%',
+    marginVertical: PADDINGS.largePadding,
   },
   textstyle5: {
-    fontSize: 15,
+    fontSize: SIZES.mediumFontSize,
     color: 'gray',
     fontFamily: 'Tajawal',
+    textAlign: 'center',
   },
   view4: {
-    width: width * 0.9,
-    height: height * 0.06,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row',
-    marginVertical: 22,
+    marginVertical: PADDINGS.largePadding,
   },
   textInput: {
     width: width * 0.15,
@@ -239,12 +265,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   view5: {
-    width: width * 0.9,
-    height: height * 0.09,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    padding: PADDINGS.smallPadding,
   },
   textstyle2: {
     fontSize: SIZES.mediumFontSize,
@@ -258,6 +282,5 @@ const styles = StyleSheet.create({
     color: defaultTheme.primary,
     fontFamily: 'Tajawal',
     marginVertical: 10,
-    textDecorationLine: 'underline',
   },
 });
