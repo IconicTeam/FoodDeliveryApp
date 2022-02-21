@@ -43,7 +43,7 @@ const TabBarCustomButton = ({
   var route = accessibilityLabel.slice(0, accessibilityLabel.indexOf(','));
   const scalAnim = useRef(new Animated.Value(0)).current;
 
-  console.log(route);
+  // console.log(route);
 
   useEffect(() => {
     if (selected) {
@@ -65,7 +65,13 @@ const TabBarCustomButton = ({
   if (selected) {
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
-        <View style={{flexDirection: 'row', position: 'absolute', top: 0}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            position: 'absolute',
+            top: 0,
+            backgroundColor: defaultTheme.background,
+          }}>
           <View style={{flex: 1, backgroundColor: defaultTheme.white}} />
           <Svg width={75} height={61} viewBox="0 0 75 61">
             <Path

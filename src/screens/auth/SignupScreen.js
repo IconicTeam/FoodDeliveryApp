@@ -179,9 +179,9 @@ class SignupScreen extends Component {
       address = `${res[0].locality}, ${res[0].country}`;
     }
     this.setState({user_location: address});
-    setTimeout(() => {
-      console.log(this.state.user_location);
-    }, 5);
+    // setTimeout(() => {
+    //   console.log(this.state.user_location);
+    // }, 5);
   };
 
   // request camera permission
