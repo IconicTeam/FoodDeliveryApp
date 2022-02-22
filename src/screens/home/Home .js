@@ -4,7 +4,7 @@ import { Text, View, Dimensions, TextInput, TouchableOpacity, Image, ImageBackgr
 import { color } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import GeneralButton from "../../components/GeneralButton";
+// import GeneralButton from "../../components/GeneralButton";
 import { SIZES, PADDINGS } from "../../constants/Constants"
 import { defaultTheme, darkTheme } from "../../constants/Theme"
 const { width, height } = Dimensions.get("screen")
