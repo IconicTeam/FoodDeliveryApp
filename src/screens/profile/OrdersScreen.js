@@ -6,12 +6,12 @@ import {
     Image,
 } from "react-native"
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { SIZES, PADDINGS } from "../constants/Constants"
-import { defaultTheme } from "../constants/Theme"
+import { SIZES, PADDINGS } from "../../constants/Constants"
+import { defaultTheme } from "../../constants/Theme"
 import { TextInput } from 'react-native-paper';
-import GeneralButton from '../components/GeneralButton';
+import GeneralButton from '../../components/GeneralButton';
 import { color } from "react-native-reanimated"
-export default class Order extends React.Component {
+export default class OrdersScreen extends React.Component {
 
 
 
