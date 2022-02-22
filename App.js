@@ -25,3 +25,13 @@ class App extends Component {
 }
 
 export default App;
+
+{
+  /*
+render(
+  const {width , height , BGColor} = this.props
+)
+
+<TouchAbleOpacity style={[styles.login , {width : width , height:height , color : "red"}]} />
+*/
+}

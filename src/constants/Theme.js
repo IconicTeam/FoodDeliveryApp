@@ -1,6 +1,6 @@
 export const defaultTheme = {
   primary: '#fb6e3b',
-  background: '#f4f4f4',
+  background: '#f7f7f7',
   card: '#ffffff',
   text: '#1c1c1e',
   text2: '#202124',
@@ -19,6 +19,7 @@ export const defaultTheme = {
   selectionColor: '#ffcbb8',
   error: '#f00f00',
   gray: 'gray',
+  whiteGray: '#eee',
 };
 
 export const darkTheme = {
@@ -42,4 +43,5 @@ export const darkTheme = {
   selectionColor: '#ffcbb8',
   error: '#f00f00',
   gray: 'gray',
+  whiteGray: '#eee',
 };
