@@ -7,7 +7,7 @@ import LottieView from 'lottie-react-native';
 
 const {width, height} = Dimensions.get('screen');
 
-export class SplashScreen extends Component {
+class SplashScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -26,6 +26,8 @@ export class SplashScreen extends Component {
         this.props.navigation.replace('IntroSliderScreen');
       } else if (switchNav == 'Auth') {
         this.props.navigation.replace('AuthStack');
+      } else if (switchNav == 'Tabs') {
+        this.props.navigation.replace('BottomTabs');
       }
     }, 3000);
   }
