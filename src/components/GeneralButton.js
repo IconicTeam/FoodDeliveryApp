@@ -13,8 +13,8 @@ class GeneralButton extends Component {
     const {
       title,
       BGcolor,
-      width,
-      height,
+      // width,
+      // height,
       textColor,
       haveBorder,
       textSize,

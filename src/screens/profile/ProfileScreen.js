@@ -33,24 +33,28 @@ export default class ProfileScreen extends React.Component {
     super(props);
     this.state = {
       photo_uri: '',
+      // categories
       catogires: [
         {
           id: 1,
           name: 'طلباتي',
           icon1: 'chevron-left',
           icon2: 'motorcycle',
+          screen: 'OrdersScreen',
         },
         {
           id: 2,
           name: 'اعدادات الحساب',
           icon1: 'chevron-left',
           icon2: 'user',
+          screen: '',
         },
         {
           id: 3,
           name: 'الدفع',
           icon1: 'chevron-left',
           icon2: 'credit-card',
+          screen: '',
         },
         // {
         //   id: 4,
@@ -285,7 +289,8 @@ export default class ProfileScreen extends React.Component {
               <TouchableOpacity
                 style={styles.view3}
                 key={index}
-                activeOpacity={0.4}>
+                activeOpacity={0.4}
+                onPress={() => this.props.navigation.navigate(catogery.screen)}>
                 <View
                   style={[
                     styles.touchableopicty2,
