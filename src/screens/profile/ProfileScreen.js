@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {AccessibilityInfo, StatusBar} from 'react-native';
+import React, { Component } from 'react';
+import { AccessibilityInfo, StatusBar } from 'react-native';
 import {
   Text,
   View,
@@ -20,14 +20,14 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import GeneralButton from '../../components/GeneralButton';
 
-import {SIZES, PADDINGS, FONTS} from '../../constants/Constants';
-import {defaultTheme, darkTheme} from '../../constants/Theme';
+import { SIZES, PADDINGS, FONTS } from '../../constants/Constants';
+import { defaultTheme, darkTheme } from '../../constants/Theme';
 
 import ImagePicker from 'react-native-image-crop-picker';
 
 import RBSheet from 'react-native-raw-bottom-sheet';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -40,18 +40,21 @@ export default class ProfileScreen extends React.Component {
           name: 'طلباتي',
           icon1: 'chevron-left',
           icon2: 'motorcycle',
+          screen: 'OrdersScreen'
         },
         {
           id: 2,
           name: 'اعدادات الحساب',
           icon1: 'chevron-left',
           icon2: 'user',
+          screen: ''
         },
         {
           id: 3,
           name: 'الدفع',
           icon1: 'chevron-left',
           icon2: 'credit-card',
+          screen: ''
         },
         // {
         //   id: 4,
@@ -130,7 +133,7 @@ export default class ProfileScreen extends React.Component {
         }
       }
     }
-    this.setState({tabs: list});
+    this.setState({ tabs: list });
   }
 
   // request camera permission
@@ -175,7 +178,7 @@ export default class ProfileScreen extends React.Component {
     })
       .then(image => {
         // console.log(image);
-        this.setState({user_image: image.path});
+        this.setState({ user_image: image.path });
 
         // close action sheet
         this.RBSheetRef.current.close();
@@ -202,7 +205,7 @@ export default class ProfileScreen extends React.Component {
     })
       .then(image => {
         // console.log(image);
-        this.setState({user_image: image.path});
+        this.setState({ user_image: image.path });
 
         // close action sheet
         this.RBSheetRef.current.close();
@@ -214,7 +217,7 @@ export default class ProfileScreen extends React.Component {
 
   // delete user photo
   deletePhoto = () => {
-    this.setState({user_image: ''});
+    this.setState({ user_image: '' });
 
     // close action sheet
     this.RBSheetRef.current.close();
@@ -232,7 +235,7 @@ export default class ProfileScreen extends React.Component {
             activeOpacity={0.4}
             style={[
               styles.touchableopicty1,
-              {backgroundColor: defaultTheme.white},
+              { backgroundColor: defaultTheme.white },
             ]}>
             <FontAwesome5
               name="sign-out-alt"
@@ -248,7 +251,7 @@ export default class ProfileScreen extends React.Component {
             }}
             style={[
               styles.imageContainer,
-              {backgroundColor: defaultTheme.white},
+              { backgroundColor: defaultTheme.white },
             ]}
             onPress={() => this.RBSheetRef.current.open()}>
             {this.state.user_image === '' ? (
@@ -260,12 +263,12 @@ export default class ProfileScreen extends React.Component {
             ) : (
               <>
                 <Image
-                  source={{uri: this.state.user_image}}
+                  source={{ uri: this.state.user_image }}
                   // resizeMode="cover"
                   style={styles.selectedUserImage}
                 />
                 <FontAwesome5
-                  style={{position: 'absolute'}}
+                  style={{ position: 'absolute' }}
                   name="camera"
                   size={SIZES.mediumIconSize}
                   color={`${defaultTheme.white}40`}
@@ -273,24 +276,26 @@ export default class ProfileScreen extends React.Component {
               </>
             )}
           </Pressable>
-          <Text style={[styles.text1, {color: defaultTheme.white}]}>
+          <Text style={[styles.text1, { color: defaultTheme.white }]}>
             Youssef Mohamed
           </Text>
         </View>
         <View
-          style={[styles.view2, {backgroundColor: defaultTheme.background}]}>
+          style={[styles.view2, { backgroundColor: defaultTheme.background }]}>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{padding: PADDINGS.padding}}>
+            contentContainerStyle={{ padding: PADDINGS.padding }}>
             {this.state.catogires.map((catogery, index) => (
               <TouchableOpacity
                 style={styles.view3}
                 key={index}
-                activeOpacity={0.4}>
+                activeOpacity={0.4}
+                onPress={() => this.props.navigation.navigate(catogery.screen)}
+              >
                 <View
                   style={[
                     styles.touchableopicty2,
-                    {backgroundColor: defaultTheme.whiteGray},
+                    { backgroundColor: defaultTheme.whiteGray },
                   ]}>
                   <FontAwesome5
                     name={catogery.icon2}
@@ -305,7 +310,7 @@ export default class ProfileScreen extends React.Component {
                       borderBottomColor: '#ccc',
                     },
                   ]}>
-                  <Text style={[styles.text3, {color: defaultTheme.text2}]}>
+                  <Text style={[styles.text3, { color: defaultTheme.text2 }]}>
                     {catogery.name}
                   </Text>
                   <FontAwesome5
@@ -358,11 +363,11 @@ export default class ProfileScreen extends React.Component {
           }}>
           <View style={styles.RBSheetContentContainer}>
             <View style={styles.RBSheetTitleView}>
-              <Text style={{...styles.RBSheetTitle, color: defaultTheme.text2}}>
+              <Text style={{ ...styles.RBSheetTitle, color: defaultTheme.text2 }}>
                 تحميل صورة
               </Text>
               <Text
-                style={[styles.RBSheetSubTitle, {color: defaultTheme.gray}]}>
+                style={[styles.RBSheetSubTitle, { color: defaultTheme.gray }]}>
                 قم باختيار الصورة الشخصية
               </Text>
             </View>
