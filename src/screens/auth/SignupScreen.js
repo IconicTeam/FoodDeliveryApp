@@ -375,7 +375,10 @@ class SignupScreen extends Component {
     return (
       // Container
       <View style={[styles.container, {backgroundColor: defaultTheme.primary}]}>
-        <ScrollView style={{flex: 1}}>
+        <ScrollView
+          style={{flex: 1}}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled">
           {/* Header */}
           <View style={[styles.headerContainer, {}]}>
             <View>
