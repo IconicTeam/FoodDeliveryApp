@@ -20,6 +20,7 @@ class NewPassword extends Component {
     this.state = {
       newPass: '',
       conNewPass: '',
+      ActiveButton: false,
     };
   }
   render() {
@@ -108,7 +109,7 @@ class NewPassword extends Component {
                 width={width * 0.5}
                 height={height * 0.07}
                 title="تأكيد"
-                BGcolor="#fb6e3b"
+                BGcolor={this.state.ActiveButton == true ? '#fb6e3b' : '#ddd'}
                 textColor="#ffffff"
                 textSize={SIZES.mediumFontSize}
                 haveBorder={false}

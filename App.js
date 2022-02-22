@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 import LoginScreen from './src/screens/auth/LoginScreen';
-import NewPassword from './src/screens/auth/NewPassword';
+import NewPassword from './src/screens/auth/NewPasswordScreen';
+import MealScreen from './src/screens/MealScreen';
+import FavRestaurants from './src/screens/FavRestaurants';
 
 import SplashScreen from './src/screens/SplashScreen';
 import IntroSliderScreen from './src/screens/IntroSliderScreen';
@@ -15,10 +17,20 @@ class App extends Component {
     return (
       <>
         {/* <ContainerNavigation></ContainerNavigation> */}
-        <NewPassword />
+        <FavRestaurants />
       </>
     );
   }
 }
 
 export default App;
+
+{
+  /*
+render(
+  const {width , height , BGColor} = this.props
+)
+
+<TouchAbleOpacity style={[styles.login , {width : width , height:height , color : "red"}]} />
+*/
+}
