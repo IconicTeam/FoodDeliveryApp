@@ -31,7 +31,11 @@ class LoginScreen extends Component {
     };
   }
 
+  // go to signup screen
   goToLoginScreen = () => this.props.navigation.navigate('SignupScreen');
+
+  // go to signup screen
+  goToHome = () => this.props.navigation.navigate('BottomTabs');
 
   render() {
     return (
@@ -56,7 +60,7 @@ class LoginScreen extends Component {
                 style={styles.textInputStyle}
                 label={'البريد الالكتروني'}
                 selectionColor="#ffcbb8"
-                underlineColor="#000"
+                underlineColor={defaultTheme.gray}
                 activeUnderlineColor="#fb6e3b"
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -66,7 +70,7 @@ class LoginScreen extends Component {
                   style={styles.textInputStyle}
                   label={'الرقم السري'}
                   selectionColor="#ffcbb8"
-                  underlineColor="#000"
+                  underlineColor={defaultTheme.gray}
                   activeUnderlineColor="#fb6e3b"
                   secureTextEntry
                 />
@@ -100,7 +104,10 @@ class LoginScreen extends Component {
                     </Text>
                   </View>
                   <View>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.props.navigation.navigate('EmailScreen')
+                      }>
                       <Text style={styles.textPass}>نسيت كلمة المرور؟</Text>
                     </TouchableOpacity>
                   </View>
@@ -112,11 +119,11 @@ class LoginScreen extends Component {
               width={width * 0.5}
               height={height * 0.065}
               title="تسجيل"
-              BGcolor="#fb6e3b"
-              textColor="#ffffff"
+              BGcolor={defaultTheme.primary}
+              textColor={defaultTheme.white}
               textSize={SIZES.mediumFontSize}
               haveBorder={false}
-              onPress={() => {}}
+              onPress={this.goToHome}
             />
 
             <View
