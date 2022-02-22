@@ -653,8 +653,8 @@ class SignupScreen extends Component {
             </View>
             <View style={[styles.signupBtnContainer]}>
               <GeneralButton
-                width={width * 0.5}
-                height={height * 0.065}
+                // width={width * 0.5}
+                // height={height * 0.065}
                 title="إنشاء"
                 BGcolor={defaultTheme.primary}
                 textColor={defaultTheme.white}

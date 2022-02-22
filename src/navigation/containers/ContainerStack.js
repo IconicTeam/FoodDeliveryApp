@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 // screens
 import SplashScreen from '../../screens/SplashScreen';
@@ -9,7 +9,7 @@ import RestaurantScreen from '../../screens/home/RestaurantScreen';
 import OrderDetailsScreen from '../../screens/profile/OrderDetailsScreen';
 import OrdersScreen from '../../screens/profile/OrdersScreen';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
@@ -26,10 +26,7 @@ class ContainerStack extends Component {
           name="OrderDetailsScreen"
           component={OrderDetailsScreen}
         />
-        <Stack.Screen
-          name="OrdersSreen"
-          component={OrdersScreen}
-        />
+        <Stack.Screen name="OrdersScreen" component={OrdersScreen} />
       </Stack.Navigator>
     );
   }
