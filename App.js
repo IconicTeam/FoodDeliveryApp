@@ -6,7 +6,7 @@ import {Text, View} from 'react-native';
 
 import SplashScreen from './src/screens/SplashScreen';
 import IntroSliderScreen from './src/screens/IntroSliderScreen';
-import Profile from './src/screens/home/Profile';
+// import Profile from './src/screens/home/Profile';
 
 // import ThemeProvider from './src/contexts/ThemeProvider';
 
