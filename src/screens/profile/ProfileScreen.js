@@ -33,6 +33,7 @@ export default class ProfileScreen extends React.Component {
     super(props);
     this.state = {
       photo_uri: '',
+      // categories
       catogires: [
         {
           id: 1,
