@@ -1,9 +1,16 @@
 import * as React from 'react';
-import {Text, View, TouchableOpacity, Image} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView
+} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {SIZES, PADDINGS} from '../../constants/Constants';
-import {defaultTheme} from '../../constants/Theme';
+import { SIZES, PADDINGS } from '../../constants/Constants';
+import { defaultTheme } from '../../constants/Theme';
 import GeneralButton from '../../components/GeneralButton';
+
 export default class Cart extends React.Component {
   constructor() {
     super();
@@ -13,13 +20,13 @@ export default class Cart extends React.Component {
           name: 'برجر حار نار',
           count: 1,
           price: 100,
-          image: require('../../assets/images/email.png'),
+          image: require('../../assets/images/burger.png'),
         },
         // {
-        //     name: 'Virginia',
-        //     count: 1,
-        //     price: 200,
-        //     image: require("../assets/images/3.jpg"),
+        //   name: 'Virginia',
+        //   count: 1,
+        //   price: 200,
+        //   image: require("../../assets/images/3.jpg"),
 
         // },
       ],
@@ -84,10 +91,11 @@ export default class Cart extends React.Component {
 
   render() {
     return (
+
       <View
         style={{
           flex: 1,
-          backgroundColor: defaultTheme.white,
+          // backgroundColor: defaultTheme.white,
         }}>
         <View
           style={{
@@ -97,9 +105,14 @@ export default class Cart extends React.Component {
           }}>
           <TouchableOpacity
             style={{
-              alignItems: 'flex-start',
+              width: 50,
+              height: 50,
+              alignItems: 'center',
               justifyContent: 'center',
-              width: '20%',
+              elevation: 1,
+              borderRadius: 15,
+              alignSelf: 'flex-start',
+              backgroundColor: defaultTheme.white,
             }}>
             <FontAwesome5 name="chevron-right" size={SIZES.smallIconSize} />
           </TouchableOpacity>
@@ -122,6 +135,7 @@ export default class Cart extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
+
         <View
           style={{
             alignItems: 'center',
@@ -136,7 +150,10 @@ export default class Cart extends React.Component {
             {this.state.sumOfItem}$
           </Text>
         </View>
+
+
         {this.state.Cart_arr.map((item, index) => (
+
           <View
             style={{
               marginTop: 10,
@@ -187,14 +204,14 @@ export default class Cart extends React.Component {
                     fontFamily: 'Tajawal',
                     fontSize: SIZES.mediumFontSize,
                   }}>
-                  السعر : {item.price}$
+                  السعر: {item.price}$
                 </Text>
                 <Text
                   style={{
                     fontFamily: 'Tajawal',
                     fontSize: SIZES.mediumFontSize,
                   }}>
-                  السعر الكلى : {item.price * item.count}$
+                  السعر الكلى: {item.price * item.count}$
                 </Text>
               </View>
             </View>
@@ -252,26 +269,27 @@ export default class Cart extends React.Component {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <TouchableOpacity
-            style={{
-              width: '60%',
-              height: '25%',
-              borderRadius: 20,
-              borderWidth: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: defaultTheme.primary,
-            }}>
-            <Text
-              style={{
-                fontFamily: 'Tajawal',
-                fontSize: SIZES.mediumFontSize,
-              }}>
-              الطلب مقابل {this.state.sumOfItem}$
-            </Text>
-          </TouchableOpacity>
+
+          <GeneralButton
+            title={"الطلب مقابل  " + (this.state.sumOfItem) + "$"}
+            BGcolor={defaultTheme.primary}
+            // width={width * 0.5}
+            // height={height * 0.065}
+            textColor={defaultTheme.white}
+            textSize={SIZES.mediumFontSize}
+            haveBorder={false}
+
+            otherStyles={{
+              alignSelf: 'center',
+              marginTop: PADDINGS.padding,
+            }}
+          />
+
         </View>
-      </View>
+
+      </View >
+
     );
   }
+
 }

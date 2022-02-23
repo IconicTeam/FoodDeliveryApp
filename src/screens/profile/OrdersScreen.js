@@ -97,7 +97,7 @@ export default class OrdersScreen extends React.Component {
         return (
             <View style={{
                 flex: 1,
-                backgroundColor: defaultTheme.primary
+                // backgroundColor: defaultTheme.primary
             }}>
 
 
@@ -111,7 +111,7 @@ export default class OrdersScreen extends React.Component {
                     padding: PADDINGS.padding,
                     justifyContent: "space-between",
                     flexDirection: "row",
-                    width: "65%"
+                    width: "70%"
                 }}>
                     <TouchableOpacity
                         activeOpacity={0.4}
@@ -127,7 +127,7 @@ export default class OrdersScreen extends React.Component {
 
                         }}>
                         <FontAwesome5
-                            name="sign-out-alt"
+                            name="chevron-right"
                             size={SIZES.smallIconSize}
                             color={defaultTheme.icon}
                         />
@@ -138,7 +138,7 @@ export default class OrdersScreen extends React.Component {
                         backgroundColor: defaultTheme.white,
                         elevation: 1,
                         borderRadius: 15,
-                        width: 100,
+                        width: 130,
                         height: 50,
                         justifyContent: "center"
 
@@ -146,7 +146,7 @@ export default class OrdersScreen extends React.Component {
                         <Text
                             style={{
                                 fontFamily: "Tajawal",
-                                fontSize: SIZES.mediumFontSize,
+                                fontSize: SIZES.largeFontSize,
                                 color: defaultTheme.text2
                             }}>الطلبات</Text>
                     </View>
