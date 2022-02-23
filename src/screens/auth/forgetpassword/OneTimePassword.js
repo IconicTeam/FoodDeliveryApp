@@ -11,7 +11,6 @@ import {
   Alert,
   ScrollView,
   StyleSheet,
-  Keyboard,
 } from 'react-native';
 // import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -30,32 +29,13 @@ export default class OneTimePassword extends React.Component {
       Verify_code2: '',
       Verify_code3: '',
       Verify_code4: '',
-      // editable1: true,
-      // editable2: false,
-      // editable3: false,
-      // editable4: false,
       pressIn: true,
       count: 0,
     };
-    // this.Verify_code1ref = React.createRef(null)
   }
 
   componentDidMount = () => {
-    setTimeout(() => {
-      this.refs.Verify_code1ref.focus();
-    }, 50);
-    this.refs.Verify_code2ref.setNativeProps({
-      editable: false,
-      // style: {
-      //   backgroundColor: '#f00',
-      // },
-    });
-    this.refs.Verify_code3ref.setNativeProps({
-      editable: false,
-    });
-    this.refs.Verify_code4ref.setNativeProps({
-      editable: false,
-    });
+    this.refs.Verify_code1ref.focus;
   };
 
   completetextinput() {
@@ -91,7 +71,7 @@ export default class OneTimePassword extends React.Component {
           contentContainerStyle={{
             paddingHorizontal: PADDINGS.padding,
           }}
-          keyboardShouldPersistTaps={'always'}>
+          keyboardShouldPersistTaps={'handled'}>
           {/* <TouchableOpacity style={styles.touchableopicty1}>
             <FontAwesome5
               name="chevron-right"
@@ -123,52 +103,13 @@ export default class OneTimePassword extends React.Component {
               maxLength={4}
               // autoFocus={true}
               value={this.state.Verify_code1}
-<<<<<<< HEAD
               onChangeText={value => {
                 this.setState({Verify_code1: value});
                 if (value != '') {
                   this.refs.Verify_code2ref.focus();
                 } else {
                   this.setState({pressIn: true});
-=======
-              onChangeText={async value => {
-                console.log(value);
-                if (value.length == 1) {
-                  await this.setState({Verify_code1: value[0]});
-                  this.refs.Verify_code2ref.setNativeProps({
-                    editable: true,
-                  });
-                  setTimeout(() => {
-                    this.refs.Verify_code2ref.focus();
-                  }, 0);
-                } else if (value.length == 4) {
-                  this.refs.Verify_code2ref.setNativeProps({
-                    editable: true,
-                  });
-                  this.refs.Verify_code3ref.setNativeProps({
-                    editable: true,
-                  });
-                  this.refs.Verify_code4ref.setNativeProps({
-                    editable: true,
-                  });
-                  setTimeout(() => {
-                    this.refs.Verify_code4ref.focus();
-                  }, 0);
-                  await this.setState({
-                    Verify_code1: value[0],
-                    Verify_code2: value[1],
-                    Verify_code3: value[2],
-                    Verify_code4: value[3],
-                  });
-                } else if (value.length == 0) {
-                  this.refs.Verify_code2ref.setNativeProps({
-                    editable: false,
-                  });
-                  await this.setState({Verify_code1: ''});
->>>>>>> 9441e9a69e30b22cfafffdb914cfa4ba5b787e3f
                 }
-
-                this.completetextinput();
               }}
             />
             <TextInput
@@ -177,23 +118,14 @@ export default class OneTimePassword extends React.Component {
               keyboardType="number-pad"
               maxLength={1}
               value={this.state.Verify_code2}
-              onChangeText={async value => {
-                await this.setState({Verify_code2: value});
+              onChangeText={value => {
+                this.setState({Verify_code2: value});
                 if (value != '') {
-                  this.refs.Verify_code3ref.setNativeProps({
-                    editable: true,
-                  });
-                  setTimeout(() => {
-                    this.refs.Verify_code3ref.focus();
-                  }, 0);
+                  this.refs.Verify_code3ref.focus();
                 } else {
-                  this.refs.Verify_code3ref.setNativeProps({
-                    editable: false,
-                  });
                   this.refs.Verify_code1ref.focus();
                   this.setState({pressIn: true});
                 }
-                this.completetextinput();
               }}
             />
             <TextInput
@@ -202,26 +134,16 @@ export default class OneTimePassword extends React.Component {
               keyboardType="number-pad"
               maxLength={1}
               value={this.state.Verify_code3}
-              onChangeText={async value => {
-                await this.setState({
+              onChangeText={value => {
+                this.setState({
                   Verify_code3: value,
                 });
                 if (value != '') {
-                  this.refs.Verify_code4ref.setNativeProps({
-                    editable: true,
-                  });
-                  setTimeout(() => {
-                    this.refs.Verify_code4ref.focus();
-                  }, 0);
+                  this.refs.Verify_code4ref.focus();
                 } else {
-                  this.refs.Verify_code4ref.setNativeProps({
-                    editable: false,
-                  });
                   this.refs.Verify_code2ref.focus();
                   this.setState({pressIn: true});
                 }
-
-                this.completetextinput();
               }}
             />
             <TextInput
@@ -230,25 +152,21 @@ export default class OneTimePassword extends React.Component {
               keyboardType="number-pad"
               maxLength={1}
               value={this.state.Verify_code4}
-              onChangeText={async value => {
-                await this.setState({Verify_code4: value});
-                if (value.length == 0) {
+              onChangeText={value => {
+                this.setState({Verify_code4: value});
+                if (value != '') {
+                  this.setState({pressIn: false});
+                } else {
                   this.refs.Verify_code3ref.focus();
-<<<<<<< HEAD
                   this.setState({pressIn: true});
 
                 }
                 
-=======
-                }
-
-                this.completetextinput();
->>>>>>> 9441e9a69e30b22cfafffdb914cfa4ba5b787e3f
               }}
             />
           </View>
           <View style={styles.view5}>
-            <Text style={styles.textstyle2}>ألم تستلم الرمز؟ </Text>
+            <Text style={styles.textstyle2}>ألم تستلم الرمز؟</Text>
             <TouchableOpacity>
               <Text style={styles.textstyle3}>أعد إرسال الرمز</Text>
             </TouchableOpacity>
@@ -258,9 +176,7 @@ export default class OneTimePassword extends React.Component {
             // width={width * 0.5}
             // height={height * 0.065}
             title="تأكيد"
-            BGcolor={
-              this.state.pressIn ? defaultTheme.gray : defaultTheme.primary
-            }
+            BGcolor={this.state.pressIn ? '#ccc' : '#fb6e3b'}
             textColor="#ffffff"
             textSize={SIZES.mediumFontSize}
             haveBorder={false}
@@ -322,7 +238,6 @@ const styles = StyleSheet.create({
     color: '#000',
     fontFamily: 'Tajawal',
     textAlign: 'center',
-    marginBottom: PADDINGS.smallPadding,
   },
   view2: {
     width: width,
@@ -364,14 +279,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textstyle2: {
-    fontSize: SIZES.smallFontSize,
+    fontSize: SIZES.mediumFontSize,
     color: '#000',
     fontFamily: 'Tajawal',
     marginVertical: 10,
     marginRight: 3,
   },
   textstyle3: {
-    fontSize: SIZES.smallFontSize,
+    fontSize: SIZES.mediumFontSize,
     color: defaultTheme.primary,
     fontFamily: 'Tajawal',
     marginVertical: 10,
