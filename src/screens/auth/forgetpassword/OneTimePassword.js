@@ -105,6 +105,7 @@ export default class OneTimePassword extends React.Component {
                 if (value != '') {
                   this.refs.Verify_code2ref.focus();
                 } else {
+                  this.setState({pressIn: true});
                 }
               }}
             />
@@ -120,6 +121,7 @@ export default class OneTimePassword extends React.Component {
                   this.refs.Verify_code3ref.focus();
                 } else {
                   this.refs.Verify_code1ref.focus();
+                  this.setState({pressIn: true});
                 }
               }}
             />
@@ -137,6 +139,7 @@ export default class OneTimePassword extends React.Component {
                   this.refs.Verify_code4ref.focus();
                 } else {
                   this.refs.Verify_code2ref.focus();
+                  this.setState({pressIn: true});
                 }
               }}
             />
@@ -153,7 +156,9 @@ export default class OneTimePassword extends React.Component {
                 } else {
                   this.refs.Verify_code3ref.focus();
                   this.setState({pressIn: true});
+
                 }
+                
               }}
             />
           </View>
