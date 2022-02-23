@@ -39,7 +39,7 @@ class LoginScreen extends Component {
 
   render() {
     return (
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{flex: 1}} keyboardShouldPersistTaps="handled">
         {/* View container */}
         <View style={styles.container}>
           {/* View 1 */}
