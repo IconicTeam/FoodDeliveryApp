@@ -122,9 +122,13 @@ export default class Cart extends React.Component {
               this.delete();
             }}
             style={{
-              alignItems: 'flex-end',
+              height: 50,
+              alignItems: 'center',
               justifyContent: 'center',
+              elevation: 1,
+              borderRadius: 15,
               width: '20%',
+              backgroundColor: defaultTheme.white,
             }}>
             <Text
               style={{
@@ -160,9 +164,8 @@ export default class Cart extends React.Component {
               flexDirection: 'row',
               width: '95%',
               height: 100,
-              padding: PADDINGS.smallPadding,
               justifyContent: 'space-between',
-              backgroundColor: defaultTheme.border,
+              backgroundColor: defaultTheme.white,
               borderRadius: 20,
               alignSelf: 'center',
             }}>
@@ -180,8 +183,8 @@ export default class Cart extends React.Component {
                 <Image
                   source={item.image}
                   style={{
-                    width: 70,
-                    height: 70,
+                    width: 80,
+                    height: 80,
                   }}
                   borderRadius={20}
                 />
@@ -190,7 +193,7 @@ export default class Cart extends React.Component {
                 style={{
                   justifyContent: 'center',
                   alignItems: 'flex-start',
-                  paddingHorizontal: PADDINGS.smallPadding,
+                  // paddingHorizontal: PADDINGS.smallPadding,
                 }}>
                 <Text
                   style={{
@@ -220,7 +223,7 @@ export default class Cart extends React.Component {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-around',
-                width: '40%',
+                width: '35%',
               }}>
               <TouchableOpacity
                 onPress={() => {
@@ -233,7 +236,7 @@ export default class Cart extends React.Component {
                   height: 25,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor: defaultTheme.border,
+
                 }}>
                 <FontAwesome5 name="plus" size={SIZES.smallIconSize} />
               </TouchableOpacity>
