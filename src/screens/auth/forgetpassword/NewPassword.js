@@ -6,6 +6,7 @@ import {
   ImageBackground,
   ScrollView,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import {TextInput} from 'react-native-paper';
 
@@ -14,6 +15,8 @@ import React, {Component} from 'react';
 import GeneralButton from '../../../components/GeneralButton';
 import {SIZES, PADDINGS} from '../../../constants/Constants';
 import {defaultTheme} from '../../../constants/Theme';
+
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -48,17 +51,17 @@ class NewPassword extends Component {
             <View style={styles.view2}>
               <Text style={styles.text1}>انشاء رقم سري جديد ؟</Text>
               <Text style={styles.text2}>
-                يجب ان يكون الرقم السري الجديد مختلف عن المستخدم سايقا
+                يجب ان يكون الرقم السري الجديد مختلف عن المستخدم سابقا
               </Text>
             </View>
             <View style={styles.view3}>
-              <View>
+              <View style={{marginBottom: PADDINGS.padding}}>
                 <TextInput
                   value={this.state.newPass}
                   onChangeText={value => {
                     this.setState({newPass: value});
                   }}
-                  style={styles.textInputStyle}
+                  style={[styles.textInputStyle]}
                   label={' الرقم السري الجديد '}
                   selectionColor="#ffcbb8"
                   underlineColor="#000"
@@ -128,6 +131,26 @@ class NewPassword extends Component {
             />
           </View>
         </ScrollView>
+
+        {/* Back Button */}
+        <TouchableOpacity
+          activeOpacity={0.4}
+          style={{
+            width: 40,
+            height: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 15,
+            backgroundColor: defaultTheme.card,
+            elevation: 2,
+            position: 'absolute',
+            margin: PADDINGS.padding,
+            left: 0,
+            top: 0,
+          }}
+          onPress={() => this.props.navigation.goBack()}>
+          <FontAwesome5 name="chevron-right" size={SIZES.mediumIconSize} />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -150,7 +173,7 @@ const styles = StyleSheet.create({
     fontSize: SIZES.largeFontSize,
     color: '#000',
     fontFamily: 'Tajawal',
-    marginBottom: 5,
+    marginBottom: PADDINGS.smallPadding,
   },
   text2: {
     fontSize: SIZES.mediumFontSize,
@@ -159,15 +182,15 @@ const styles = StyleSheet.create({
   },
   view3: {
     width: width * 0.9,
-    height: height * 0.21,
     backgroundColor: '#eee',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    // alignItems: 'center',
     marginVertical: height * 0.06,
     borderRadius: 10,
+    padding: PADDINGS.padding,
   },
   textInputStyle: {
-    width: width * 0.75,
+    width: '100%',
     height: height * 0.065,
     backgroundColor: '#fff',
     borderTopLeftRadius: 5,

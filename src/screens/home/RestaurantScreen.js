@@ -18,6 +18,9 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import GeneralButton from '../../components/GeneralButton';
 import {SIZES, PADDINGS} from '../../constants/Constants';
 import {defaultTheme, darkTheme} from '../../constants/Theme';
+
+import Icon from 'react-native-vector-icons/AntDesign';
+
 const {width, height} = Dimensions.get('screen');
 export default class RestaurantScreen extends React.Component {
   constructor(props) {
@@ -113,6 +116,8 @@ export default class RestaurantScreen extends React.Component {
       restaurant: {
         ...this.props.route.params.restaurant,
       },
+
+      heartColor: false,
     };
   }
 
@@ -151,26 +156,33 @@ export default class RestaurantScreen extends React.Component {
           }}
           style={styles.imageBackgroundstyle}>
           <View style={styles.view1}>
-            <TouchableOpacity style={styles.touchableopicty1}>
+            <TouchableOpacity
+              activeOpacity={0.4}
+              style={{
+                width: 40,
+                height: 40,
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 15,
+                backgroundColor: defaultTheme.card,
+                elevation: 2,
+              }}
+              onPress={() => this.props.navigation.goBack()}>
               <FontAwesome5
                 name="chevron-right"
-                color={'#000'}
                 size={SIZES.mediumIconSize}
+                color={defaultTheme.icon}
               />
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.touchableopicty1}
               onPress={() => {
-                if (this.state.liked == true) {
-                  this.setState({liked: false});
-                } else {
-                  this.setState({liked: true});
-                }
-              }}>
-              <FontAwesome5
-                name="heart"
-                color={this.state.liked ? '#000' : '#f00'}
+                this.setState({heartColor: !this.state.heartColor});
+              }}
+              style={styles.touchableopicty1}>
+              <Icon
+                name={this.state.heartColor ? 'heart' : 'hearto'}
                 size={SIZES.mediumIconSize}
+                color={this.state.heartColor ? '#d00' : defaultTheme.icon}
               />
             </TouchableOpacity>
           </View>
@@ -286,7 +298,12 @@ export default class RestaurantScreen extends React.Component {
                 data={this.state.products}
                 renderItem={({item, index}) =>
                   item.show ? (
-                    <View style={styles.item_continer}>
+                    <TouchableOpacity
+                      style={styles.item_continer}
+                      activeOpacity={0.4}
+                      onPress={() =>
+                        this.props.navigation.navigate('MealScreen')
+                      }>
                       <Image
                         source={item.image}
                         style={{width: 120, height: 120, borderRadius: 60}}
@@ -296,7 +313,7 @@ export default class RestaurantScreen extends React.Component {
                       <TouchableOpacity style={styles.touchableopicty2}>
                         <Text>{item.price}</Text>
                       </TouchableOpacity>
-                    </View>
+                    </TouchableOpacity>
                   ) : null
                 }
                 keyExtractor={(item, index) => index.toString()}
@@ -321,7 +338,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     padding: PADDINGS.padding,
-    marginTop: 20,
+    // marginTop: 20,
   },
   touchableopicty1: {
     width: 40,
