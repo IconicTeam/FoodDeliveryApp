@@ -375,7 +375,10 @@ class SignupScreen extends Component {
     return (
       // Container
       <View style={[styles.container, {backgroundColor: defaultTheme.primary}]}>
-        <ScrollView style={{flex: 1}}>
+        <ScrollView
+          style={{flex: 1}}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled">
           {/* Header */}
           <View style={[styles.headerContainer, {}]}>
             <View>
@@ -650,8 +653,8 @@ class SignupScreen extends Component {
             </View>
             <View style={[styles.signupBtnContainer]}>
               <GeneralButton
-                width={width * 0.5}
-                height={height * 0.065}
+                // width={width * 0.5}
+                // height={height * 0.065}
                 title="إنشاء"
                 BGcolor={defaultTheme.primary}
                 textColor={defaultTheme.white}

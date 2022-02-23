@@ -4,6 +4,7 @@ import {
     View,
     TouchableOpacity,
     Image,
+    StatusBar
 } from "react-native"
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { SIZES, PADDINGS } from "../../constants/Constants"
@@ -22,8 +23,7 @@ export default class OrdersScreen extends React.Component {
                 {
                     order_id: '1',
                     order_rest_name: 'كبابجى أبو محمد',
-                    order_rest_image:
-                        'https://scontent.fcai19-1.fna.fbcdn.net/v/t1.6435-9/190896978_139700408216877_7037998798904860139_n.png?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=islCm9sSCxAAX8c72IN&_nc_ht=scontent.fcai19-1.fna&oh=00_AT918bTxKDjadaui3mawzmg010Xcys-3P_vjKEbx9EvTrQ&oe=6234F708',
+                    order_rest_image: require("../../assets/images/4.jpg"),
                     order_date: 'febraury 19, 2022 - 3:30 PM',
                     order_support_number: '01019112065',
                     order_current_state: 1, // 0 or 1 or 2 or 3 -> indexes for "labels" array
@@ -54,7 +54,40 @@ export default class OrdersScreen extends React.Component {
                         },
                     ],
                 },
-
+                {
+                    order_id: '1',
+                    order_rest_name: 'مطعم الشيخ سعيد',
+                    order_rest_image: require("../../assets/images/5.jpg"),
+                    order_date: 'may 19, 2022 - 3:30 PM',
+                    order_support_number: '01019112065',
+                    order_current_state: 1, // 0 or 1 or 2 or 3 -> indexes for "labels" array
+                    order_delivery_man_name: 'عدى حاتم',
+                    order_delivery_man_number: '01019112065',
+                    order_delivery_man_rate: 4.7,
+                    order_delivery_man_image:
+                        'https://i.ytimg.com/vi/fU7txqHLuJA/maxresdefault.jpg',
+                    // order items
+                    order_items: [
+                        {
+                            item_id: '1',
+                            item_name: 'ساندوتش كبده',
+                            item_price: 10,
+                            item_count: 2,
+                        },
+                        {
+                            item_id: '2',
+                            item_name: 'وجبة فراخ كاملة',
+                            item_price: 20,
+                            item_count: 1,
+                        },
+                        {
+                            item_id: '3',
+                            item_name: 'وجبة لحمة كاملة',
+                            item_price: 30,
+                            item_count: 3,
+                        },
+                    ],
+                },
             ]
         }
     }
@@ -62,15 +95,71 @@ export default class OrdersScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
-                {this.state.Orders.map((item, index) => (
+            <View style={{
+                flex: 1,
+                backgroundColor: defaultTheme.primary
+            }}>
+
+
+                <StatusBar
+                    barStyle="light-content"
+                    backgroundColor={defaultTheme.primary}
+                />
+
+                <View style={{
+                    alignItems: 'center',
+                    padding: PADDINGS.padding,
+                    justifyContent: "space-between",
+                    flexDirection: "row",
+                    width: "65%"
+                }}>
+                    <TouchableOpacity
+                        activeOpacity={0.4}
+                        style={{
+                            width: 50,
+                            height: 50,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            elevation: 1,
+                            borderRadius: 15,
+                            alignSelf: 'flex-start',
+                            backgroundColor: defaultTheme.white,
+
+                        }}>
+                        <FontAwesome5
+                            name="sign-out-alt"
+                            size={SIZES.smallIconSize}
+                            color={defaultTheme.icon}
+                        />
+                    </TouchableOpacity>
                     <View style={{
+                        alignItems: "center",
+                        alignSelf: "center",
+                        backgroundColor: defaultTheme.white,
+                        elevation: 1,
+                        borderRadius: 15,
+                        width: 100,
+                        height: 50,
+                        justifyContent: "center"
+
+                    }}>
+                        <Text
+                            style={{
+                                fontFamily: "Tajawal",
+                                fontSize: SIZES.mediumFontSize,
+                                color: defaultTheme.text2
+                            }}>الطلبات</Text>
+                    </View>
+                </View>
+
+                {this.state.Orders.map((item, index) => (
+                    <TouchableOpacity style={{
                         width: "90%",
                         alignSelf: "center",
                         backgroundColor: defaultTheme.white,
                         height: 150,
                         elevation: 3,
-                        marginTop: 10,
+                        marginTop: 20,
                         borderRadius: 20,
                         padding: PADDINGS.padding
                     }}>
@@ -109,7 +198,7 @@ export default class OrdersScreen extends React.Component {
                                     style={{
                                         fontFamily: "Tajawal",
                                         fontSize: SIZES.mediumFontSize
-                                    }}>may 19,2022 - 3:30 pm</Text>
+                                    }}>{item.order_date}</Text>
 
                             </View>
                         </View>
@@ -123,22 +212,23 @@ export default class OrdersScreen extends React.Component {
                                     fontFamily: "Tajawal",
                                     fontSize: SIZES.mediumFontSize,
                                     color: defaultTheme.text2
-                                }}>{item.item_name}</Text>
+                                }}>{item.order_items[index].item_name}x{item.order_items[index].item_count}</Text>
                             </View>
                             <View>
                                 <Text style={{
                                     fontFamily: "Tajawal",
                                     fontSize: SIZES.mediumFontSize,
                                     color: defaultTheme.text2
-                                }}>{item.item_price}</Text>
+                                }}>{item.order_items[index].item_price * item.order_items[index].item_count}</Text>
                             </View>
                         </View>
-                    </View>
+                    </TouchableOpacity>
 
 
 
                 ))}
             </View>
+
         )
     }
 }

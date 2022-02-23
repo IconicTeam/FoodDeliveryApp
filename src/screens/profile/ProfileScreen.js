@@ -40,21 +40,21 @@ export default class ProfileScreen extends React.Component {
           name: 'طلباتي',
           icon1: 'chevron-left',
           icon2: 'motorcycle',
-          screen: 'OrdersScreen'
+          screen: 'OrdersScreen',
         },
         {
           id: 2,
           name: 'اعدادات الحساب',
           icon1: 'chevron-left',
           icon2: 'user',
-          screen: ''
+          screen: '',
         },
         {
           id: 3,
           name: 'الدفع',
           icon1: 'chevron-left',
           icon2: 'credit-card',
-          screen: ''
+          screen: '',
         },
         // {
         //   id: 4,
@@ -290,8 +290,7 @@ export default class ProfileScreen extends React.Component {
                 style={styles.view3}
                 key={index}
                 activeOpacity={0.4}
-                onPress={() => this.props.navigation.navigate(catogery.screen)}
-              >
+                onPress={() => this.props.navigation.navigate(catogery.screen)}>
                 <View
                   style={[
                     styles.touchableopicty2,
@@ -451,8 +450,8 @@ const styles = StyleSheet.create({
     backgroundColor: defaultTheme.primary,
   },
   touchableopicty1: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 1,
