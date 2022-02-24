@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Dimensions, AsyncStorage} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 
 import {defaultTheme} from '../constants/Theme';
 
 import LottieView from 'lottie-react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width, height} = Dimensions.get('screen');
 
