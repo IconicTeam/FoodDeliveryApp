@@ -10,9 +10,10 @@ import {
   Dimensions,
   StyleSheet,
   ActivityIndicator,
+  Linking,
 } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {SIZES, PADDINGS} from '../../../constants/Constants';
+import {SIZES, PADDINGS, FONTS} from '../../../constants/Constants';
 import {defaultTheme} from '../../../constants/Theme';
 import {TextInput} from 'react-native-paper';
 import GeneralButton from '../../../components/GeneralButton';
@@ -33,7 +34,7 @@ export default class App extends React.Component {
   validateEmail = email => {
     var em =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return em.test(email);
+    return em.test(email.trim());
   };
 
   render() {
@@ -113,6 +114,9 @@ export default class App extends React.Component {
               underlineColor={defaultTheme.gray}
               activeUnderlineColor={defaultTheme.primary}
               selectionColor={defaultTheme.selectionColor}
+              autoCorrect={false}
+              keyboardType="email-address"
+              autoCapitalize="none"
               style={{
                 backgroundColor: defaultTheme.white,
                 width: '100%',
@@ -128,8 +132,8 @@ export default class App extends React.Component {
                 style={{
                   fontSize: SIZES.smallFontSize,
                   color: defaultTheme.error,
-                  textAlign: 'center',
-                  fontFamily: 'Tajawal',
+                  fontFamily: FONTS.fontFamily,
+                  marginTop: 4,
                 }}>
                 {this.state.emailError}
               </Text>
@@ -161,7 +165,9 @@ export default class App extends React.Component {
                 } else {
                   // valid email
                   emailError = '';
-                  alert(' تم ارسال كود التاكيد');
+                  // alert(' تم ارسال كود التاكيد');
+                  console.log('تم ارسال كود التاكيد');
+                  Linking.openURL(`mailto:${this.state.email}?subject:Test`);
                   this.props.navigation.navigate('OneTimePassword');
                 }
               }
