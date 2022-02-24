@@ -15,12 +15,10 @@ import React, {Component} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/Entypo';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
-import {SIZES, PADDINGS} from '../constants/Constants';
-import {defaultTheme} from '../constants/Theme';
-import {add} from 'react-native-reanimated';
-import GeneralButton from '../components/GeneralButton';
-// import RadioButton from 'react-native-radio-button';
-import {RadioButton} from 'react-native-paper';
+import {SIZES, PADDINGS} from '../../constants/Constants';
+import {defaultTheme} from '../../constants/Theme';
+import GeneralButton from '../../components/GeneralButton';
+
 const {width, height} = Dimensions.get('screen');
 
 export class MealScreen extends Component {
@@ -41,19 +39,19 @@ export class MealScreen extends Component {
       maxRating: [1, 2, 3, 4, 5],
       addions: [
         {
-          image: require('../assets/images/tomato.png'),
+          image: require('../../assets/images/tomato.png'),
         },
         {
-          image: require('../assets/images/cheese.png'),
+          image: require('../../assets/images/cheese.png'),
         },
         {
-          image: require('../assets/images/shrimp.png'),
+          image: require('../../assets/images/shrimp.png'),
         },
         {
-          image: require('../assets/images/potatoes.png'),
+          image: require('../../assets/images/potatoes.png'),
         },
         {
-          image: require('../assets/images/onion.png'),
+          image: require('../../assets/images/onion.png'),
         },
       ],
       showModal: false,
@@ -75,6 +73,7 @@ export class MealScreen extends Component {
           check: false,
         },
       ],
+      clickedItemIndex: 0,
     };
   }
 
@@ -95,14 +94,15 @@ export class MealScreen extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View
+        style={[styles.container, {backgroundColor: defaultTheme.background}]}>
         <ScrollView
-          contentContainerStyle={{paddingBottom: height * 0.15}}
+          contentContainerStyle={{paddingBottom: height * 0.1}}
           showsVerticalScrollIndicator={false}>
           <View style={styles.viewImage1}>
             <ImageBackground
               resizeMode="contain"
-              source={require('../assets/images/pizza.png')}
+              source={require('../../assets/images/pizza.png')}
               style={styles.imageBG}>
               <View style={styles.view2}>
                 <TouchableOpacity
@@ -201,7 +201,9 @@ export class MealScreen extends Component {
               return (
                 <View style={{flexDirection: 'row', marginBottom: 10}}>
                   <TouchableOpacity
-                    onPress={() => {}}
+                    onPress={() => {
+                      this.setState({clickedItemIndex: index});
+                    }}
                     style={{
                       width: 22,
                       height: 22,
@@ -211,7 +213,7 @@ export class MealScreen extends Component {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
-                    {item.check ? (
+                    {index == this.state.clickedItemIndex ? (
                       <View
                         style={{
                           backgroundColor: '#fb6e3b',
@@ -257,14 +259,42 @@ export class MealScreen extends Component {
             })}
           </View> */}
         </ScrollView>
-        <TouchableOpacity style={styles.viewIcon}>
-          <Icon name="right" size={SIZES.mediumIconSize} color="#000" />
+        <TouchableOpacity
+          activeOpacity={0.4}
+          style={{
+            width: 40,
+            height: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 15,
+            backgroundColor: defaultTheme.card,
+            elevation: 2,
+            position: 'absolute',
+            margin: PADDINGS.padding,
+          }}
+          onPress={() => this.props.navigation.goBack()}>
+          <Icon2
+            name="chevron-right"
+            size={SIZES.mediumIconSize}
+            color={defaultTheme.icon}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             this.setState({heartColor: !this.state.heartColor});
           }}
-          style={styles.viewIcon2}>
+          style={{
+            width: 40,
+            height: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 15,
+            backgroundColor: defaultTheme.card,
+            elevation: 2,
+            position: 'absolute',
+            margin: PADDINGS.padding,
+            right: 0,
+          }}>
           <Icon
             name={this.state.heartColor ? 'heart' : 'hearto'}
             size={SIZES.mediumIconSize}
@@ -284,7 +314,7 @@ export class MealScreen extends Component {
                 : this.state.color2
                 ? 10 * this.state.count
                 : 5 * this.state.count}
-              {'$'}
+              {' جنية'}
             </Text>
           </TouchableOpacity>
         </View>
@@ -313,8 +343,7 @@ export class MealScreen extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    width: width,
-    height: height,
+    flex: 1,
   },
   view1: {
     flexDirection: 'row',
@@ -452,9 +481,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: height * 0.048,
-    borderTopColor: '#ddd',
-    borderTopWidth: 0.5,
+    bottom: 0,
+    // borderTopColor: '#ddd',
+    elevation: 5,
+    // borderTopWidth: 0.5,
   },
   payButtonStyle: {
     width: width * 0.8,

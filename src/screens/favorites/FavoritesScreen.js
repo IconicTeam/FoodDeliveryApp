@@ -15,6 +15,8 @@ import {SIZES, PADDINGS} from '../../constants/Constants';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {defaultTheme} from '../../constants/Theme';
+
 const {width, height} = Dimensions.get('screen');
 class FavoritesScreen extends Component {
   constructor() {
@@ -125,7 +127,8 @@ class FavoritesScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View
+        style={[styles.container, {backgroundColor: defaultTheme.background}]}>
         <View style={styles.topView}>
           <View
             style={{
@@ -134,7 +137,7 @@ class FavoritesScreen extends Component {
               height: height * 0.055,
               borderRadius: 15,
               backgroundColor: '#eee',
-              paddingHorizontal: width * 0.05,
+              paddingLeft: PADDINGS.padding,
               alignItems: 'center',
             }}>
             <Icon name="search1" size={25} color="#000" />
@@ -146,12 +149,12 @@ class FavoritesScreen extends Component {
                   : this.searchMeals(value);
               }}
               placeholder="البحث"
+              selectionColor={defaultTheme.selectionColor}
               style={{
-                width: width * 0.6,
-                height: height * 0.05,
+                flex: 1,
                 borderRadius: 15,
                 backgroundColor: '#eee',
-                paddingHorizontal: 10,
+                paddingHorizontal: PADDINGS.padding,
                 fontFamily: 'Tajawal',
               }}
             />
@@ -200,7 +203,9 @@ class FavoritesScreen extends Component {
           </TouchableOpacity>
         </View>
         <View style={{flex: 1}}>
-          <ScrollView>
+          <ScrollView
+            contentContainerStyle={{paddingBottom: PADDINGS.largePadding}}
+            showsVerticalScrollIndicator={false}>
             {this.state.meals
               ? this.state.favMeals.map((item, index) => {
                   return (
@@ -306,7 +311,15 @@ class FavoritesScreen extends Component {
                             activeOpacity={0.55}
                             style={[
                               styles.favRestaurants,
-                              {alignItems: 'center', justifyContent: 'center'},
+                              {
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginTop:
+                                  index == 0
+                                    ? PADDINGS.largePadding -
+                                      PADDINGS.smallPadding
+                                    : PADDINGS.largePadding,
+                              },
                             ]}>
                             <Text
                               style={{
@@ -333,7 +346,6 @@ class FavoritesScreen extends Component {
                                   marginLeft: width * 0.05,
                                   flexDirection: 'row',
                                   alignItems: 'center',
-                                  marginBottom: PADDINGS.largePadding,
                                 }}>
                                 <Text
                                   style={{
@@ -399,7 +411,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'space-between',
     padding: 1,
-    marginBottom: 2,
+    marginBottom: PADDINGS.smallPadding,
   },
   chooseView2: {
     width: width * 0.44,
@@ -415,7 +427,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: '#eee',
     alignSelf: 'center',
-    marginTop: PADDINGS.largePadding,
+    // marginTop: PADDINGS.largePadding,
   },
 });
 
