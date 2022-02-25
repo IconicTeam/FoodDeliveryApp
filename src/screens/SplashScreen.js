@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-import {defaultTheme} from '../constants/Theme';
+import { defaultTheme } from '../constants/Theme';
 
 import LottieView from 'lottie-react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 class SplashScreen extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class SplashScreen extends Component {
 
   render() {
     return (
-      <View style={[styles.body, {backgroundColor: defaultTheme.background}]}>
+      <View style={[styles.body, { backgroundColor: defaultTheme.background }]}>
         <View style={styles.lottieViewContainer}>
           <LottieView
             source={require('../assets/lotties/burger.json')}
