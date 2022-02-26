@@ -545,6 +545,7 @@ class SignupScreen extends Component {
                   />
                   <TouchableOpacity
                     style={[styles.showPassBtn]}
+                    activeOpacity={activeOpacity}
                     onPress={this.handleVisiblePass}>
                     <Icon
                       name={passSecureTextEntry ? 'eye-slash' : 'eye'}
@@ -592,6 +593,7 @@ class SignupScreen extends Component {
                   />
                   <TouchableOpacity
                     style={[styles.showPassBtn]}
+                    activeOpacity={activeOpacity}
                     onPress={this.handleVisibleConfirmPass}>
                     <Icon
                       name={confirmPassSecureTextEntry ? 'eye-slash' : 'eye'}
@@ -614,18 +616,17 @@ class SignupScreen extends Component {
               </View>
               {/* location */}
               <View style={{marginBottom: PADDINGS.padding}}>
-                <TouchableOpacity
+                <View
                   style={[styles.textInputWithIcon]}
-                  activeOpacity={activeOpacity}
-                  onPress={() => this.getCurrentPosition()}>
+                  // activeOpacity={activeOpacity}
+                  // onPress={() => this.getCurrentPosition()}
+                >
                   <TextInput
-                    editable={false}
+                    // editable={false}
                     style={[
-                      // styles.textInputStyle,
+                      styles.textInputStyle,
                       {
                         backgroundColor: defaultTheme.card,
-                        minHeight: height * 0.065,
-                        width: '100%',
                       },
                     ]}
                     label={'العنوان الافتراضى'}
@@ -636,12 +637,15 @@ class SignupScreen extends Component {
                     selectionColor={defaultTheme.selectionColor}
                     underlineColor={defaultTheme.black}
                     activeUnderlineColor={defaultTheme.primary}
-                    multiline
+                    // multiline
                   />
-                  <View style={[styles.locationBtn]}>
+                  <TouchableOpacity
+                    style={[styles.locationBtn]}
+                    activeOpacity={activeOpacity}
+                    onPress={() => this.getCurrentPosition()}>
                     <Icon name={'map-marker-alt'} size={SIZES.smallIconSize} />
-                  </View>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                </View>
                 {confirm_pass_err.length != 0 && (
                   <View style={[styles.errorContainer]}>
                     <Text style={[styles.errText, {color: defaultTheme.error}]}>
@@ -870,7 +874,7 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     width: '100%',
-    height: height * 0.065,
+    height: 50,
     borderRadius: 5,
     overflow: 'hidden',
     textAlign: 'right',
@@ -1005,6 +1009,7 @@ const styles = StyleSheet.create({
     width: width * 0.3,
     height: width * 0.3,
     // borderRadius: height / 2,
+    borderRadius: (width * 0.3) / 2,
   },
   RBSheetSubTitle: {
     fontSize: SIZES.mediumFontSize,
