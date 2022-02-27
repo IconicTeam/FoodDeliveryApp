@@ -108,8 +108,11 @@ export default class App extends React.Component {
               onChangeText={value => {
                 this.setState({
                   email: value,
-                  emailError: '',
                 });
+
+                if (this.validateEmail(value)) {
+                  this.setState({emailError: ''});
+                }
               }}
               underlineColor={defaultTheme.gray}
               activeUnderlineColor={defaultTheme.primary}

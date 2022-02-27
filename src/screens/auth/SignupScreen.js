@@ -316,7 +316,7 @@ class SignupScreen extends Component {
   };
 
   // signup
-  signup = (name, email, pass, confirm_pass, location) => {
+  signup = (email, pass, confirm_pass) => {
     alert(`${email}\n${pass}\n${confirm_pass}`);
   };
 
@@ -325,8 +325,10 @@ class SignupScreen extends Component {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(value.trim()) == false && value.trim().length != 0) {
       this.setState({email_err: 'برجاء إدخال بريد الكترونى صحيح!'});
+      return false;
     } else {
       this.setState({email_err: '', user_email: value});
+      return true;
     }
   };
 
@@ -334,8 +336,10 @@ class SignupScreen extends Component {
     // password
     if (value.trim().length < 6 && value.trim().length != 0) {
       this.setState({pass_err: 'يجب تكون كلمة السر أكبر من أو تساوى 6 أحرف!'});
+      return false;
     } else {
       this.setState({pass_err: '', user_password: value});
+      return true;
     }
   };
 
@@ -345,9 +349,24 @@ class SignupScreen extends Component {
       this.setState({
         confirm_pass_err: 'كلمة السر غير متطابقة!',
       });
+      return false;
     } else {
       this.setState({confirm_pass_err: '', user_confirm_password: value});
+      return true;
     }
+  };
+
+  onChangeEmail = value => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    return reg.test(value.trim());
+  };
+
+  onChangePassword = value => {
+    return value.trim().length >= 6;
+  };
+
+  onChangeConfirmPassword = value => {
+    return value.trim() == this.state.user_password;
   };
 
   render() {
@@ -499,6 +518,9 @@ class SignupScreen extends Component {
                   value={user_email}
                   onChangeText={value => {
                     this.setState({user_email: value});
+                    if (this.onChangeEmail(value)) {
+                      this.setState({email_err: ''});
+                    }
                   }}
                   selectionColor={defaultTheme.selectionColor}
                   underlineColor={defaultTheme.black}
@@ -531,6 +553,9 @@ class SignupScreen extends Component {
                     value={user_password}
                     onChangeText={value => {
                       this.setState({user_password: value});
+                      if (this.onChangePassword(value)) {
+                        this.setState({pass_err: ''});
+                      }
                     }}
                     selectionColor={defaultTheme.selectionColor}
                     underlineColor={defaultTheme.black}
@@ -579,6 +604,9 @@ class SignupScreen extends Component {
                     value={user_confirm_password}
                     onChangeText={value => {
                       this.setState({user_confirm_password: value});
+                      if (this.onChangeConfirmPassword(value)) {
+                        this.setState({confirm_pass_err: ''});
+                      }
                     }}
                     selectionColor={defaultTheme.selectionColor}
                     underlineColor={defaultTheme.black}
