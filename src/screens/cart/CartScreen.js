@@ -4,12 +4,16 @@ import {
   View,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Dimensions,
+  StyleSheet,
 } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { SIZES, PADDINGS } from '../../constants/Constants';
-import { defaultTheme } from '../../constants/Theme';
+import {SIZES, PADDINGS, FONTS} from '../../constants/Constants';
+import {defaultTheme} from '../../constants/Theme';
 import GeneralButton from '../../components/GeneralButton';
+
+const {width, height} = Dimensions.get('screen');
 
 export default class Cart extends React.Component {
   constructor() {
@@ -17,8 +21,7 @@ export default class Cart extends React.Component {
     this.state = {
       Cart_arr: [
         {
-
-          product_name: "البرجر",
+          product_name: 'البرجر',
 
           product_arr: [
             {
@@ -39,34 +42,26 @@ export default class Cart extends React.Component {
               price: 100,
               image: require('../../assets/images/123.jpg'),
             },
-
-          ]
-
+          ],
         },
         {
-
-          product_name: "البيتزا",
+          product_name: 'البيتزا',
 
           product_arr: [
             {
-              name: "بيتزا مارجيريتا",
+              name: 'بيتزا مارجيريتا',
               count: 1,
               price: 50,
               image: require('../../assets/images/pizza.png'),
             },
             {
-              name: "بيتزا لحوم",
+              name: 'بيتزا لحوم',
               count: 1,
               price: 150,
               image: require('../../assets/images/pizzaMeal.png'),
             },
-
-          ]
-
-        }
-
-
-
+          ],
+        },
       ],
 
       sumOfItem: 100,
@@ -90,9 +85,7 @@ export default class Cart extends React.Component {
     if (item[index].product_arr[index].count > 1) {
       item[index].product_arr[index].count--;
 
-
       // total = item[index].product_arr[index].count * item[index].product_arr[index].price;
-
     }
 
     this.setState({
@@ -108,8 +101,6 @@ export default class Cart extends React.Component {
 
       // total = item[index].product_arr[index].count * item[index].product_arr[index].price;
     }
-
-
 
     this.setState({
       Cart_arr: item,
@@ -131,7 +122,6 @@ export default class Cart extends React.Component {
 
   render() {
     return (
-
       <View
         style={{
           flex: 1,
@@ -141,12 +131,14 @@ export default class Cart extends React.Component {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-
+            alignItems: 'center',
+            marginBottom: PADDINGS.padding,
+            // backgroundColor: '#f00',
           }}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
-              width: 50,
-              height: 50,
+              width: height * 0.054,
+              height: height * 0.054,
               alignItems: 'center',
               justifyContent: 'center',
               elevation: 1,
@@ -154,28 +146,23 @@ export default class Cart extends React.Component {
               alignSelf: 'flex-start',
               backgroundColor: defaultTheme.white,
             }}>
-            <FontAwesome5 name="chevron-right" size={SIZES.smallIconSize} />
-          </TouchableOpacity>
+            <FontAwesome5 name="chevron-right" size={SIZES.mediumIconSize} />
+          </TouchableOpacity> */}
+
+          <Text style={[styles.title, {color: defaultTheme.text2}]}>السلة</Text>
 
           <TouchableOpacity
+            activeOpacity={0.4}
             onPress={() => {
               this.delete();
-            }}
-            style={{
-              height: 50,
-              alignItems: 'center',
-              justifyContent: 'center',
-              elevation: 1,
-              borderRadius: 15,
-              width: '20%',
-              backgroundColor: defaultTheme.white,
             }}>
             <Text
               style={{
                 fontFamily: 'Tajawal',
-                fontSize: SIZES.mediumFontSize,
+                fontSize: SIZES.smallFontSize,
+                color: defaultTheme.primary,
               }}>
-              حذف
+              حذف الكل
             </Text>
           </TouchableOpacity>
         </View>
@@ -195,139 +182,136 @@ export default class Cart extends React.Component {
           </Text>
         </View> */}
 
-
         <ScrollView showsVerticalScrollIndicator={false}>
           {this.state.Cart_arr.map((item, index) => (
             <View>
               <View
                 style={{
-                  alignItems: "flex-start",
+                  alignItems: 'flex-start',
                   justifyContent: 'center',
                   borderBottomWidth: 1,
                   borderColor: defaultTheme.gray,
-
                 }}>
                 <Text
                   style={{
                     fontSize: SIZES.mediumFontSize,
                     fontFamily: 'Tajawal',
                     marginBottom: PADDINGS.smallPadding,
-                    marginTop: PADDINGS.padding
-
+                    marginTop: PADDINGS.padding,
                   }}>
                   محل {item.product_name}
                 </Text>
               </View>
-              {this.state.Cart_arr[index].product_arr.map((item, product_index) => (
-                <View
-                  style={{
-                    marginTop: PADDINGS.padding,
-                    flexDirection: 'row',
-                    width: '100%',
-                    height: 100,
-                    justifyContent: 'space-between',
-                    // backgroundColor: defaultTheme.white,
-                    borderRadius: 20,
-                    alignSelf: 'center',
-                  }}>
+              {this.state.Cart_arr[index].product_arr.map(
+                (item, product_index) => (
                   <View
                     style={{
+                      marginTop: PADDINGS.padding,
                       flexDirection: 'row',
-                      width: '50%',
+                      width: '100%',
+                      height: 100,
                       justifyContent: 'space-between',
+                      // backgroundColor: defaultTheme.white,
+                      borderRadius: 20,
+                      alignSelf: 'center',
                     }}>
                     <View
                       style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        flexDirection: 'row',
+                        width: '50%',
+                        justifyContent: 'space-between',
                       }}>
-                      <Image
-                        source={item.image}
+                      <View
                         style={{
-                          width: 80,
-                          height: 80,
-                          backgroundColor: defaultTheme.border
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+                        <Image
+                          source={item.image}
+                          style={{
+                            width: 80,
+                            height: 80,
+                            backgroundColor: defaultTheme.border,
+                          }}
+                          borderRadius={20}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          justifyContent: 'center',
+                          alignItems: 'flex-start',
+                          marginHorizontal: PADDINGS.smallPadding,
+                        }}>
+                        <Text
+                          style={{
+                            fontFamily: 'Tajawal',
+                            fontSize: SIZES.mediumFontSize,
+                          }}>
+                          {item.name}
+                        </Text>
+                        <Text
+                          style={{
+                            fontFamily: 'Tajawal',
+                            fontSize: SIZES.mediumFontSize,
+                          }}>
+                          السعر: {item.price}$
+                        </Text>
+                      </View>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-around',
+                        width: '35%',
+                      }}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          this.plus(product_index);
                         }}
-                        borderRadius={20}
-                      />
-                    </View>
-                    <View
-                      style={{
-                        justifyContent: 'center',
-                        alignItems: 'flex-start',
-                        marginHorizontal: PADDINGS.smallPadding
-
-                      }}>
-                      <Text
                         style={{
-                          fontFamily: 'Tajawal',
-                          fontSize: SIZES.mediumFontSize,
+                          borderWidth: 1,
+                          borderRadius: 15,
+                          width: 35,
+                          height: 35,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          backgroundColor: defaultTheme.border,
+                          borderColor: defaultTheme.border,
                         }}>
-                        {item.name}
-                      </Text>
-                      <Text
+                        <FontAwesome5 name="plus" size={SIZES.smallIconSize} />
+                      </TouchableOpacity>
+                      <View>
+                        <Text
+                          style={{
+                            fontFamily: 'Tajawal',
+                            fontSize: SIZES.mediumFontSize,
+                            color: defaultTheme.text2,
+                          }}>
+                          {item.count}
+                        </Text>
+                      </View>
+                      <TouchableOpacity
+                        disabled={item.count == 1}
+                        onPress={() => {
+                          this.min(product_index);
+                        }}
                         style={{
-                          fontFamily: 'Tajawal',
-                          fontSize: SIZES.mediumFontSize,
+                          borderWidth: 1,
+                          borderRadius: 15,
+                          width: 35,
+                          height: 35,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          backgroundColor: defaultTheme.border,
+                          borderColor: defaultTheme.border,
                         }}>
-                        السعر: {item.price}$
-                      </Text>
+                        <FontAwesome5 name="minus" size={SIZES.smallIconSize} />
+                      </TouchableOpacity>
                     </View>
                   </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-around',
-                      width: '35%',
-                    }}>
-                    <TouchableOpacity
-                      onPress={() => {
-                        this.plus(product_index);
-                      }}
-                      style={{
-                        borderWidth: 1,
-                        borderRadius: 15,
-                        width: 35,
-                        height: 35,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: defaultTheme.border,
-                        borderColor: defaultTheme.border
-
-                      }}>
-                      <FontAwesome5 name="plus" size={SIZES.smallIconSize} />
-                    </TouchableOpacity>
-                    <View>
-                      <Text
-                        style={{
-                          fontFamily: 'Tajawal',
-                          fontSize: SIZES.mediumFontSize,
-                          color: defaultTheme.text2
-                        }}>
-                        {item.count}
-                      </Text>
-                    </View>
-                    <TouchableOpacity
-                      disabled={item.count == 1}
-                      onPress={() => {
-                        this.min(product_index);
-                      }}
-                      style={{
-                        borderWidth: 1,
-                        borderRadius: 15,
-                        width: 35,
-                        height: 35,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: defaultTheme.border,
-                        borderColor: defaultTheme.border
-                      }}>
-                      <FontAwesome5 name="minus" size={SIZES.smallIconSize} />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              ))}
+                ),
+              )}
             </View>
           ))}
         </ScrollView>
@@ -336,30 +320,29 @@ export default class Cart extends React.Component {
           style={{
             alignItems: 'center',
             justifyContent: 'center',
-            marginVertical: PADDINGS.largePadding
+            marginVertical: PADDINGS.largePadding,
           }}>
-
           <GeneralButton
-            title={"الطلب مقابل  " + (this.state.sumOfItem) + "$"}
+            title={'الطلب مقابل  ' + this.state.sumOfItem + '$'}
             BGcolor={defaultTheme.primary}
             // width={width * 0.5}
             // height={height * 0.065}
             textColor={defaultTheme.white}
             textSize={SIZES.mediumFontSize}
             haveBorder={false}
-
             otherStyles={{
               alignSelf: 'center',
-
-
             }}
           />
-
         </View>
-
-      </View >
-
+      </View>
     );
   }
-
 }
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: SIZES.largeFontSize,
+    fontFamily: FONTS.fontFamily,
+  },
+});
