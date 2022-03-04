@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {AccessibilityInfo, FlatList} from 'react-native';
+import React, { Component } from 'react';
+import { AccessibilityInfo, FlatList } from 'react-native';
 import {
   Text,
   View,
@@ -11,69 +11,231 @@ import {
   Alert,
   ScrollView,
   StyleSheet,
+  StatusBar
 } from 'react-native';
-import {color} from 'react-native-reanimated';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { color } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import GeneralButton from '../../components/GeneralButton';
-import {SIZES, PADDINGS} from '../../constants/Constants';
-import {defaultTheme, darkTheme} from '../../constants/Theme';
+import { SIZES, PADDINGS } from '../../constants/Constants';
+import { defaultTheme, darkTheme } from '../../constants/Theme';
 
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 export default class RestaurantScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       products: [
         {
-          id: 1,
-          name: 'البرجر ',
-          image: require('../../assets/images/123.jpg'),
-          price: '40 جنيها',
-          wight: '245 جرام',
+          meal_id: 1,
+          meal_name: 'البرجر ',
+          meal_image: require('../../assets/images/123.jpg'),
+          meal_price: 17 + "جنية",
+          meal_wight: 230 + "جرام",
           show: true,
+
+
+          //Ady
+          
+          meal_sizes:[
+            {
+              size_id:1,
+              size:"صغير",
+              size_name:"برجر سنجل",
+            }, {
+              size_id:2,
+              size:"وسط",
+              size_name:"برجر دابل",
+            },{
+              
+                size_id:3,
+                size:"كبير",
+                size_name:"برجر تريبل",
+              
+            }
+          ],meal_type:[
+            {
+              type_id:1,
+              type_name:"برجر لحمة",
+              type_small:17,
+              type_meduim:35,
+              type_large:70
+            }
+          ],
+
+
+
+          // youssef
+          KindAndPrice: [
+            {
+              size1: "برجر سنجل ",
+              size2: "برجر دابل ",
+              size3: "برجر تريبل ",
+              PriceofKind1: 17 + "جنية",
+              PriceofKind2: 35 + "جنية",
+              PriceofKind3: 70 + "جنية",
+              type_name:" برجر لحمة",
+            },{
+              size1: "برجر سنجل ",
+              size2: "برجر دابل ",
+              size3: "برجر تريبل ",
+              PriceofKind1: 17 + "جنية",
+              PriceofKind2: 35 + "جنية",
+              PriceofKind3: 70 + "جنية",
+              type_name:" برجر تشيز جبن",
+            },{
+              size1: "برجر سنجل ",
+              size2: "برجر دابل ",
+              size3: "برجر تريبل ",
+              PriceofKind1: 17 + "جنية",
+              PriceofKind2: 35 + "جنية",
+              PriceofKind3: 70 + "جنية",
+              type_name:" برجر بيف",
+            },{
+              size1: "برجر سنجل ",
+              size2: "برجر دابل ",
+              size3: "برجر تريبل ",
+              PriceofKind1: 17 + "جنية",
+              PriceofKind2: 35 + "جنية",
+              PriceofKind3: 70 + "جنية",
+              type_name:" برجر تشيز جبن",
+            }
+          ],
+        },
+
+        {
+          meal_id: 2,
+          meal_name: 'البيتزا',
+          meal_image: require('../../assets/images/pizza.jpg'),
+          meal_price: 41 + "جنية",
+          meal_wight: 200 + "جرام",
+          show: true,
+          KindAndPrice: [
+            {
+              size1: "بيتيزا صغيرة",
+              size2: "بيتيزا وسط ",
+              size3: "بيتيزا كبيرة",
+              PriceofKind1: 41 + "جنية",
+              PriceofKind2: 47 + "جنية",
+              PriceofKind3: 59 + "جنية",
+              type1_name:" بيتيزا مشكل جبن",
+            },{
+              size1: "بيتيزا صغيرة",
+              size2: "بيتيزا وسط ",
+              size3: "بيتيزا كبيرة",
+              PriceofKind1: 41 + "جنية",
+              PriceofKind2: 47 + "جنية",
+              PriceofKind3: 59 + "جنية",
+              type2_name:" بيتيزا لحوم",
+            },{
+              size1: "بيتيزا صغيرة",
+              size2: "بيتيزا وسط ",
+              size3: "بيتيزا كبيرة",
+              PriceofKind1: 41 + "جنية",
+              PriceofKind2: 47 + "جنية",
+              PriceofKind3: 59 + "جنية",
+              type3_name:" بيتيزا جمبري",
+            },{
+              size1: "بيتيزا صغيرة",
+              size2: "بيتيزا وسط ",
+              size3: "بيتيزا كبيرة",
+              PriceofKind1: 41 + "جنية",
+              PriceofKind2: 47 + "جنية",
+              PriceofKind3: 59 + "جنية",
+              type4_name:" بيتيزا مشروم",
+            },{
+              size1: "بيتيزا صغيرة",
+              size2: "بيتيزا وسط ",
+              size3: "بيتيزا كبيرة",
+              PriceofKind1: 41 + "جنية",
+              PriceofKind2: 47 + "جنية",
+              PriceofKind3: 59 + "جنية",
+              type5_name:" بيتزا مارجريتا",
+
+            },{
+              size1: "بيتيزا صغيرة",
+              size2: "بيتيزا وسط ",
+              size3: "بيتيزا كبيرة",
+              PriceofKind1: 41 + "جنية",
+              PriceofKind2: 47 + "جنية",
+              PriceofKind3: 59 + "جنية",
+              type6_name:"بيتزا الباربكيو"
+            }
+          ],
         },
         {
-          id: 2,
-          name: 'البيتزا',
-          image: require('../../assets/images/pizza.jpg'),
-          price: '60 جنيها',
-          wight: '250 جرام',
+          meal_id: 3,
+          meal_name: 'ستيك لحمة',
+          meal_image: require('../../assets/images/steak.jpg'),
+          meal_price: 75 + "جنية",
+          meal_wight: 250 + "جرام",
           show: true,
+          KindAndPrice: [
+            {
+              kind1: "ربع كليو",
+              kind2: "نص كليو",
+              kind3: "كليو ",
+              PriceofKind1: 75 + "جنية",
+              PriceofKind2: 150 + "جنية",
+              PriceofKind3: 300 + "جنية",
+            }
+          ]
         },
         {
-          id: 3,
-          name: 'ستيك لحمة',
-          image: require('../../assets/images/steak.jpg'),
-          price: '70 جنيها',
-          wight: '200 جرام',
+          meal_id: 4,
+          meal_name: 'جمبري',
+          meal_image: require('../../assets/images/جمبري.jpg'),
+          meal_price: 90 + "جنية",
+          meal_wight: 250 + "جرام",
           show: true,
+          KindAndPrice: [
+            {
+              kind1: "ربع كليو",
+              kind2: "نص كليو",
+              kind3: "كليو ",
+              PriceofKind1: 90 + "جنية",
+              PriceofKind2: 180 + "جنية",
+              PriceofKind3: 360 + "جنية",
+            }
+          ]
         },
         {
-          id: 4,
-          name: 'جمبري',
-          image: require('../../assets/images/جمبري.jpg'),
-          price: '45 جنيها',
-          wight: '190 جرام',
+          meal_id: 5,
+          meal_image: require('../../assets/images/كفتة-مشوية-.jpg'),
+          meal_name: 'كفتة مشوية',
+          meal_price: 55 + "جنية",
+          meal_wight: 250 + "جرام",
           show: true,
+          KindAndPrice: [
+            {
+              kind1: "ربع كليو",
+              kind2: "نص كليو",
+              kind3: "كليو ",
+              PriceofKind1: 55 + "جنية",
+              PriceofKind2: 110 + "جنية",
+              PriceofKind3: 220 + "جنية",
+            }
+          ]
         },
         {
-          id: 5,
-          image: require('../../assets/images/كفتة-مشوية-.jpg'),
-          name: 'كفتة مشوية',
-          price: '45 جنيها',
-          wight: '190 جرام',
+          meal_id: 6,
+          meal_name: 'دجاج',
+          meal_image: require('../../assets/images/دجاج.jpg'),
+          meal_price: 95 + "جنية",
+          meal_wight: '190 جرام',
           show: true,
-        },
-        {
-          id: 6,
-          name: 'دجاج',
-          image: require('../../assets/images/دجاج.jpg'),
-          price: '45 جنيها',
-          wight: '190 جرام',
-          show: true,
+          KindAndPrice: [
+            {
+              kind1: "دجاج مشوي  ",
+              kind2: "دجاج طاووق",
+              kind3: "دجاج كنتاكي  ",
+              PriceofKind1: 95 + "جنية",
+              PriceofKind2: 160 + "جنية",
+              PriceofKind3: 180 + "جنية",
+            }
+          ]
         },
       ],
       liked: true,
@@ -132,7 +294,7 @@ export default class RestaurantScreen extends React.Component {
       for (let j = 0; j < list.length; j++) {
         list[j].show = true;
       }
-      this.setState({seletedName: ''});
+      this.setState({ seletedName: '' });
     } else {
       for (let i = 0; i < list.length; i++) {
         if (list[i].name.toLowerCase().includes(item.toLowerCase())) {
@@ -141,18 +303,23 @@ export default class RestaurantScreen extends React.Component {
           list[i].show = false;
         }
       }
-      this.setState({seletedName: item});
+      this.setState({ seletedName: item });
     }
 
-    this.setState({products: list});
+    this.setState({ products: list });
   }
 
   render() {
     return (
       <View style={styles.viewcontiner}>
+        <StatusBar
+          translucent={true}
+
+
+        />
         <ImageBackground
           source={{
-            uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxRRZWuwISCnYGxt6MPL6M1rOF7yjbJsO5aw&usqp=CAU',
+            uri: 'https://c8.alamy.com/comp/MTH543/burger-and-fries-on-wooden-board-on-dark-stone-background-homemade-burger-or-cheeseburger-french-fries-and-ketchup-tasty-sandwich-top-view-with-co-MTH543.jpg',
           }}
           style={styles.imageBackgroundstyle}>
           <View style={styles.view1}>
@@ -166,6 +333,8 @@ export default class RestaurantScreen extends React.Component {
                 borderRadius: 15,
                 backgroundColor: defaultTheme.card,
                 elevation: 2,
+                marginTop: PADDINGS.padding + StatusBar.currentHeight
+
               }}
               onPress={() => this.props.navigation.goBack()}>
               <FontAwesome5
@@ -176,7 +345,7 @@ export default class RestaurantScreen extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                this.setState({heartColor: !this.state.heartColor});
+                this.setState({ heartColor: !this.state.heartColor });
               }}
               style={styles.touchableopicty1}>
               <Icon
@@ -186,141 +355,142 @@ export default class RestaurantScreen extends React.Component {
               />
             </TouchableOpacity>
           </View>
-          <View style={styles.view2}>
-            <Image
-              source={{
-                uri: 'https://gfx4arab.com/wp-content/uploads/wpdm-cache/appetizing-burger-background_23-2147635650-900x0.jpg',
-              }}
-              style={styles.image1}
-            />
-            <View
-              style={{
-                marginTop: 10,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Text style={styles.text1}> المأكولات</Text>
-            </View>
-            <View style={styles.view3}>
-              <TouchableOpacity style={styles.view4}>
-                <FontAwesome5
-                  name="motorcycle"
-                  style={{marginRight: 4}}
-                  color="#fb6e3b"
-                  size={SIZES.mediumIconSize}
-                />
-                <Text style={styles.text2}>مجاني</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.view4}>
-                <FontAwesome5
-                  name="clock"
-                  style={{marginRight: 4}}
-                  color="#fb6e3b"
-                  size={SIZES.mediumIconSize}
-                />
-                <Text style={styles.text2}>25-30 دقيقة</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.view4}>
-                <FontAwesome5
-                  name="star"
-                  style={{marginRight: 4}}
-                  color="#fb6e3b"
-                  size={SIZES.mediumIconSize}
-                />
-                <Text style={styles.text2}>تقييم</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.view5}>
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{paddingLeft: PADDINGS.padding}}>
-                {this.state.catories.map((catogery, index) => {
-                  return (
-                    <TouchableOpacity
-                      onPress={() => {
-                        let categories = this.state.catories;
+        </ImageBackground>
 
-                        if (categories[index].catory_selected) {
-                          for (let i = 0; i < categories.length; i++) {
+        <View style={styles.view2}>
+          <Image
+            source={{
+              uri: 'https://gfx4arab.com/wp-content/uploads/wpdm-cache/appetizing-burger-background_23-2147635650-900x0.jpg',
+            }}
+            style={styles.image1}
+          />
+          <View
+            style={{
+              marginTop: 10,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text style={styles.text1}> المأكولات</Text>
+          </View>
+          <View style={styles.view3}>
+            <TouchableOpacity style={styles.view4}>
+              <FontAwesome5
+                name="motorcycle"
+                style={{ marginRight: 4 }}
+                color="#fb6e3b"
+                size={SIZES.smallIconSize}
+              />
+              <Text style={styles.text2}>مجاني</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.view4}>
+              <FontAwesome5
+                name="clock"
+                style={{ marginRight: 4 }}
+                color="#fb6e3b"
+                size={SIZES.smallIconSize}
+              />
+              <Text style={styles.text2}>25-30 دقيقة</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.view4}>
+              <FontAwesome5
+                name="star"
+                style={{ marginRight: 4 }}
+                color="#fb6e3b"
+                size={SIZES.smallIconSize}
+              />
+              <Text style={styles.text2}>تقييم</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.view5}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingLeft: PADDINGS.padding }}>
+              {this.state.catories.map((catogery, index) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      let categories = this.state.catories;
+
+                      if (categories[index].catory_selected) {
+                        for (let i = 0; i < categories.length; i++) {
+                          categories[i].catory_selected = false;
+                        }
+                      } else {
+                        for (let i = 0; i < categories.length; i++) {
+                          if (index == i) {
+                            categories[i].catory_selected = true;
+                          } else {
                             categories[i].catory_selected = false;
                           }
-                        } else {
-                          for (let i = 0; i < categories.length; i++) {
-                            if (index == i) {
-                              categories[i].catory_selected = true;
-                            } else {
-                              categories[i].catory_selected = false;
-                            }
-                          }
                         }
+                      }
 
-                        this.setState({catories: categories});
-                        this.search(catogery.name);
-                      }}
-                      key={index}>
-                      <View
+                      this.setState({ catories: categories });
+                      this.search(catogery.name);
+                    }}
+                    key={index}>
+                    <View
+                      style={[
+                        styles.view6,
+                        {
+                          backgroundColor: catogery.catory_selected
+                            ? defaultTheme.primary
+                            : '#ddd',
+                        },
+                      ]}>
+                      <Text
                         style={[
-                          styles.view6,
+                          styles.text3,
                           {
-                            backgroundColor: catogery.catory_selected
-                              ? defaultTheme.primary
-                              : '#ddd',
+                            color: catogery.catory_selected
+                              ? defaultTheme.white
+                              : defaultTheme.gray,
                           },
                         ]}>
-                        <Text
-                          style={[
-                            styles.text3,
-                            {
-                              color: catogery.catory_selected
-                                ? defaultTheme.white
-                                : defaultTheme.gray,
-                            },
-                          ]}>
-                          {catogery.name}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  );
-                })}
-              </ScrollView>
-            </View>
-            <View style={styles.items_continer}>
-              <FlatList
-                numColumns={2}
-                showsVerticalScrollIndicator={false}
-                style={{flex: 1}}
-                columnWrapperStyle={{
-                  justifyContent: 'space-between',
-                  marginTop: PADDINGS.padding,
-                }}
-                contentContainerStyle={{paddingBottom: PADDINGS.padding}}
-                data={this.state.products}
-                renderItem={({item, index}) =>
-                  item.show ? (
-                    <TouchableOpacity
-                      style={styles.item_continer}
-                      activeOpacity={0.4}
-                      onPress={() =>
-                        this.props.navigation.navigate('MealScreen')
-                      }>
-                      <Image
-                        source={item.image}
-                        style={{width: 120, height: 120, borderRadius: 60}}
-                      />
-                      <Text style={styles.text2}>{item.name}</Text>
-                      <Text>{item.wight}</Text>
-                      <TouchableOpacity style={styles.touchableopicty2}>
-                        <Text>{item.price}</Text>
-                      </TouchableOpacity>
-                    </TouchableOpacity>
-                  ) : null
-                }
-                keyExtractor={(item, index) => index.toString()}
-              />
-            </View>
+                        {catogery.name}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
           </View>
-        </ImageBackground>
+          <View style={styles.items_continer}>
+            <FlatList
+              numColumns={2}
+              showsVerticalScrollIndicator={false}
+              style={{ flex: 1 }}
+              columnWrapperStyle={{
+                justifyContent: 'space-between',
+                marginTop: PADDINGS.padding,
+              }}
+              contentContainerStyle={{ paddingBottom: PADDINGS.padding }}
+              data={this.state.products}
+              renderItem={({ item, index }) =>
+                item.show ? (
+                  <TouchableOpacity
+                    style={styles.item_continer}
+                    activeOpacity={0.4}
+                    onPress={() =>
+                      this.props.navigation.navigate('MealScreen')
+                    }>
+                    <Image
+                      source={item.meal_image}
+                      style={{ width: 120, height: 120, borderRadius: 60 }}
+                    />
+                    <Text style={styles.text2}>{item.meal_name}</Text>
+                    <Text>{item.meal_wight}</Text>
+                    <TouchableOpacity style={styles.touchableopicty2}>
+                      <Text>{item.meal_price}</Text>
+                    </TouchableOpacity>
+                  </TouchableOpacity>
+                ) : null
+              }
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
+        </View>
       </View>
     );
   }
@@ -328,7 +498,7 @@ export default class RestaurantScreen extends React.Component {
 const styles = StyleSheet.create({
   viewcontiner: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f4f4',
     alignItems: 'center',
   },
   view1: {
@@ -348,19 +518,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     elevation: 3,
     borderRadius: 15,
+    marginTop: PADDINGS.padding + StatusBar.currentHeight
   },
   imageBackgroundstyle: {
     flex: 1,
     width: width,
+    height: height * 0.24
   },
   view2: {
     width: width,
-    backgroundColor: '#f4f4f4',
+    backgroundColor: "#f4f4f4",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
-    flex: 1,
+    flex: 4,
     alignSelf: 'center',
-    marginTop: 10,
+    marginTop: -22,
   },
   image1: {
     width: 80,
@@ -401,6 +573,7 @@ const styles = StyleSheet.create({
     fontSize: SIZES.smallFontSize,
     color: '#000',
     fontFamily: 'Tajawal',
+    marginLeft: 4
   },
   view5: {
     width: width,
