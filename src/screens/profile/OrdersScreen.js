@@ -221,7 +221,7 @@ export default class OrdersScreen extends React.Component {
                         }}>
                         <FontAwesome5
                             name="chevron-right"
-                            size={SIZES.smallIconSize}
+                            size={SIZES.mediumIconSize}
                             color={defaultTheme.icon}
                         />
                     </TouchableOpacity>
