@@ -215,9 +215,11 @@ class Restaurants extends Component {
       duration: 500,
       // easing: Easing.quad,
     }).start(() => {
-      Keyboard.dismiss();
-      this.inputRef.current.clear();
-      this.applySearch('');
+      setTimeout(() => {
+        Keyboard.dismiss();
+        this.inputRef.current.clear();
+        this.applySearch('');
+      }, 5);
     });
   };
 
