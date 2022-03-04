@@ -122,6 +122,7 @@ export default class OneTimePassword extends React.Component {
               keyboardType="number-pad"
               maxLength={4}
               // autoFocus={true}
+              textContentType="oneTimeCode"
               value={this.state.Verify_code1}
               onChangeText={async value => {
                 console.log(value);
@@ -168,6 +169,7 @@ export default class OneTimePassword extends React.Component {
               keyboardType="number-pad"
               maxLength={1}
               value={this.state.Verify_code2}
+              textContentType="oneTimeCode"
               onChangeText={async value => {
                 await this.setState({Verify_code2: value});
                 if (value != '') {
@@ -192,6 +194,7 @@ export default class OneTimePassword extends React.Component {
               keyboardType="number-pad"
               maxLength={1}
               value={this.state.Verify_code3}
+              textContentType="oneTimeCode"
               onChangeText={async value => {
                 await this.setState({
                   Verify_code3: value,
@@ -218,6 +221,7 @@ export default class OneTimePassword extends React.Component {
               ref={'Verify_code4ref'}
               keyboardType="number-pad"
               maxLength={1}
+              textContentType="oneTimeCode"
               value={this.state.Verify_code4}
               onChangeText={async value => {
                 await this.setState({Verify_code4: value});

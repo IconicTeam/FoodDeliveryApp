@@ -128,7 +128,7 @@ class BottomTabs extends Component {
       <Tab.Navigator
         tabBarOptions={{
           showLabel: false,
-          keyboardHidesTabBar: true,
+          keyboardHidesTabBar: true, // hide tabBar when keyboard open
           style: {
             ...styles.bttomTabsContainer,
           },

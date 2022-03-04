@@ -17,18 +17,56 @@ export default class Cart extends React.Component {
     this.state = {
       Cart_arr: [
         {
-          name: 'برجر حار نار',
-          count: 1,
-          price: 100,
-          image: require('../../assets/images/burger.png'),
-        },
-        // {
-        //   name: 'Virginia',
-        //   count: 1,
-        //   price: 200,
-        //   image: require("../../assets/images/3.jpg"),
 
-        // },
+          product_name: "البرجر",
+
+          product_arr: [
+            {
+              name: 'برجر حار نار',
+              count: 1,
+              price: 100,
+              image: require('../../assets/images/burger.png'),
+            },
+            {
+              name: 'برجر حار نار',
+              count: 1,
+              price: 100,
+              image: require('../../assets/images/burger-king-veggie-burger-11562993225drer5ymmrx.png'),
+            },
+            {
+              name: 'برجر حار نار',
+              count: 1,
+              price: 100,
+              image: require('../../assets/images/123.jpg'),
+            },
+
+          ]
+
+        },
+        {
+
+          product_name: "البيتزا",
+
+          product_arr: [
+            {
+              name: "بيتزا مارجيريتا",
+              count: 1,
+              price: 50,
+              image: require('../../assets/images/pizza.png'),
+            },
+            {
+              name: "بيتزا لحوم",
+              count: 1,
+              price: 150,
+              image: require('../../assets/images/pizzaMeal.png'),
+            },
+
+          ]
+
+        }
+
+
+
       ],
 
       sumOfItem: 100,
@@ -49,31 +87,33 @@ export default class Cart extends React.Component {
 
   min(index) {
     let item = this.state.Cart_arr;
-    if (item[index].count > 1) {
-      item[index].count--;
-      total = item[index].count * item[index].price;
-    } else {
-      item.splice(index, 1);
-      total = 0;
+    if (item[index].product_arr[index].count > 1) {
+      item[index].product_arr[index].count--;
+
+
+      // total = item[index].product_arr[index].count * item[index].product_arr[index].price;
+
     }
 
     this.setState({
       Cart_arr: item,
-      sumOfItem: total,
+      // sumOfItem: total,
     });
   }
 
-  plus(index) {
+  plus(index, product_index) {
     let item = this.state.Cart_arr;
-    if (item[index].count >= 1) {
-      item[index].count++;
+    if (item[index].product_arr[product_index].count >= 1) {
+      item[index].product_arr[product_index].count++;
 
-      total = item[index].count * item[index].price;
+      // total = item[index].product_arr[index].count * item[index].product_arr[index].price;
     }
+
+
 
     this.setState({
       Cart_arr: item,
-      sumOfItem: total,
+      // sumOfItem: total,
     });
   }
 
@@ -95,13 +135,13 @@ export default class Cart extends React.Component {
       <View
         style={{
           flex: 1,
-          // backgroundColor: defaultTheme.white,
+          padding: PADDINGS.padding,
         }}>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            padding: PADDINGS.padding,
+
           }}>
           <TouchableOpacity
             style={{
@@ -140,137 +180,163 @@ export default class Cart extends React.Component {
           </TouchableOpacity>
         </View>
 
-        <View
+        {/* <View
           style={{
-            alignItems: 'center',
+            alignItems: "flex-start",
             justifyContent: 'center',
           }}>
           <Text
             style={{
-              fontSize: SIZES.mediumFontSize,
+              fontSize: SIZES.largeFontSize,
               fontFamily: 'Tajawal',
+              color: defaultTheme.text2
             }}>
-            {this.state.Cart_arr.length} من الطلبات فى السله يساوى{' '}
-            {this.state.sumOfItem}$
+            {this.state.Cart_arr.length} من الطلبات فى السله يساوى {this.state.sumOfItem}$
           </Text>
-        </View>
+        </View> */}
 
 
-        {this.state.Cart_arr.map((item, index) => (
-
-          <View
-            style={{
-              marginTop: 10,
-              flexDirection: 'row',
-              width: '95%',
-              height: 100,
-              justifyContent: 'space-between',
-              backgroundColor: defaultTheme.white,
-              borderRadius: 20,
-              alignSelf: 'center',
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '50%',
-                justifyContent: 'space-between',
-              }}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {this.state.Cart_arr.map((item, index) => (
+            <View>
               <View
                 style={{
+                  alignItems: "flex-start",
                   justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Image
-                  source={item.image}
-                  style={{
-                    width: 80,
-                    height: 80,
-                  }}
-                  borderRadius={20}
-                />
-              </View>
-              <View
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'flex-start',
-                  // paddingHorizontal: PADDINGS.smallPadding,
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'Tajawal',
-                    fontSize: SIZES.mediumFontSize,
-                  }}>
-                  {item.name}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: 'Tajawal',
-                    fontSize: SIZES.mediumFontSize,
-                  }}>
-                  السعر: {item.price}$
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: 'Tajawal',
-                    fontSize: SIZES.mediumFontSize,
-                  }}>
-                  السعر الكلى: {item.price * item.count}$
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-                width: '35%',
-              }}>
-              <TouchableOpacity
-                onPress={() => {
-                  this.plus(index);
-                }}
-                style={{
-                  borderWidth: 1,
-                  borderRadius: 15,
-                  width: 25,
-                  height: 25,
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  borderBottomWidth: 1,
+                  borderColor: defaultTheme.gray,
 
                 }}>
-                <FontAwesome5 name="plus" size={SIZES.smallIconSize} />
-              </TouchableOpacity>
-              <View>
                 <Text
                   style={{
-                    fontFamily: 'Tajawal',
                     fontSize: SIZES.mediumFontSize,
+                    fontFamily: 'Tajawal',
+                    marginBottom: PADDINGS.smallPadding,
+                    marginTop: PADDINGS.padding
+
                   }}>
-                  {item.count}
+                  محل {item.product_name}
                 </Text>
               </View>
-              <TouchableOpacity
-                onPress={() => {
-                  this.min(index);
-                }}
-                style={{
-                  borderWidth: 1,
-                  borderRadius: 15,
-                  width: 25,
-                  height: 25,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <FontAwesome5 name="minus" size={SIZES.smallIconSize} />
-              </TouchableOpacity>
+              {this.state.Cart_arr[index].product_arr.map((item, product_index) => (
+                <View
+                  style={{
+                    marginTop: PADDINGS.padding,
+                    flexDirection: 'row',
+                    width: '100%',
+                    height: 100,
+                    justifyContent: 'space-between',
+                    // backgroundColor: defaultTheme.white,
+                    borderRadius: 20,
+                    alignSelf: 'center',
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      width: '50%',
+                      justifyContent: 'space-between',
+                    }}>
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Image
+                        source={item.image}
+                        style={{
+                          width: 80,
+                          height: 80,
+                          backgroundColor: defaultTheme.border
+                        }}
+                        borderRadius={20}
+                      />
+                    </View>
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                        marginHorizontal: PADDINGS.smallPadding
+
+                      }}>
+                      <Text
+                        style={{
+                          fontFamily: 'Tajawal',
+                          fontSize: SIZES.mediumFontSize,
+                        }}>
+                        {item.name}
+                      </Text>
+                      <Text
+                        style={{
+                          fontFamily: 'Tajawal',
+                          fontSize: SIZES.mediumFontSize,
+                        }}>
+                        السعر: {item.price}$
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-around',
+                      width: '35%',
+                    }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.plus(product_index);
+                      }}
+                      style={{
+                        borderWidth: 1,
+                        borderRadius: 15,
+                        width: 35,
+                        height: 35,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: defaultTheme.border,
+                        borderColor: defaultTheme.border
+
+                      }}>
+                      <FontAwesome5 name="plus" size={SIZES.smallIconSize} />
+                    </TouchableOpacity>
+                    <View>
+                      <Text
+                        style={{
+                          fontFamily: 'Tajawal',
+                          fontSize: SIZES.mediumFontSize,
+                          color: defaultTheme.text2
+                        }}>
+                        {item.count}
+                      </Text>
+                    </View>
+                    <TouchableOpacity
+                      disabled={item.count == 1}
+                      onPress={() => {
+                        this.min(product_index);
+                      }}
+                      style={{
+                        borderWidth: 1,
+                        borderRadius: 15,
+                        width: 35,
+                        height: 35,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: defaultTheme.border,
+                        borderColor: defaultTheme.border
+                      }}>
+                      <FontAwesome5 name="minus" size={SIZES.smallIconSize} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))}
             </View>
-          </View>
-        ))}
+          ))}
+        </ScrollView>
 
         <View
           style={{
             alignItems: 'center',
             justifyContent: 'center',
+            marginVertical: PADDINGS.largePadding
           }}>
 
           <GeneralButton
@@ -284,7 +350,8 @@ export default class Cart extends React.Component {
 
             otherStyles={{
               alignSelf: 'center',
-              marginTop: PADDINGS.padding,
+
+
             }}
           />
 
