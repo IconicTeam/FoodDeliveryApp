@@ -58,22 +58,27 @@ export class MealScreen extends Component {
       pizzaType: [
         {
           type: 'بيتزا مشكل جبن',
+          price: 30,
           check: false,
         },
         {
           type: 'بيتزا لحوم ',
+          price: 50,
           check: false,
         },
         {
           type: 'بيتزا جمبري',
+          price: 60,
           check: false,
         },
         {
           type: 'بيتزا مشروم ',
+          price: 40,
           check: false,
         },
       ],
       clickedItemIndex: 0,
+      pizzaTypePrice: 1,
     };
   }
 
@@ -173,7 +178,7 @@ export class MealScreen extends Component {
               <Text style={styles.smallText}>صغير</Text>
             </TouchableOpacity>
           </View>
-          <View style={{marginLeft: width * 0.05, marginBottom: height * 0.03}}>
+          <View style={{marginLeft: width * 0.05, marginBottom: height * 0.01}}>
             <Text style={[styles.text1, {fontSize: SIZES.mediumFontSize}]}>
               اضف الي البيتزا
             </Text>
@@ -199,11 +204,15 @@ export class MealScreen extends Component {
           <View style={styles.pizzas}>
             {this.state.pizzaType.map((item, index) => {
               return (
-                <View style={{flexDirection: 'row', marginBottom: 10}}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.setState({clickedItemIndex: index});
-                    }}
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({
+                      clickedItemIndex: index,
+                      pizzaTypePrice: item.price,
+                    });
+                  }}
+                  style={{flexDirection: 'row', marginBottom: 10}}>
+                  <View
                     style={{
                       width: 22,
                       height: 22,
@@ -222,7 +231,7 @@ export class MealScreen extends Component {
                           borderRadius: 7,
                         }}></View>
                     ) : null}
-                  </TouchableOpacity>
+                  </View>
                   <Text
                     style={[
                       styles.text1,
@@ -233,7 +242,7 @@ export class MealScreen extends Component {
                     ]}>
                     {item.type}
                   </Text>
-                </View>
+                </TouchableOpacity>
               );
             })}
           </View>
@@ -310,10 +319,10 @@ export class MealScreen extends Component {
             <Text style={{fontSize: 24, fontFamily: 'Tajawal', color: '#fff'}}>
               اضف الي العربة{' '}
               {this.state.color
-                ? 15 * this.state.count
+                ? 15 * this.state.count + this.state.pizzaTypePrice
                 : this.state.color2
-                ? 10 * this.state.count
-                : 5 * this.state.count}
+                ? 10 * this.state.count + this.state.pizzaTypePrice
+                : 5 * this.state.count + this.state.pizzaTypePrice}
               {' جنية'}
             </Text>
           </TouchableOpacity>
@@ -330,10 +339,10 @@ export class MealScreen extends Component {
             <Text style={styles.text1}>
               price :{' '}
               {this.state.color
-                ? this.state.count * 15
+                ? this.state.count * 15 + this.state.pizzaTypePrice
                 : this.state.color2
-                ? this.state.count * 10
-                : this.state.count * 5}
+                ? this.state.count * 10 + this.state.pizzaTypePrice
+                : this.state.count * 5 + this.state.pizzaTypePrice}
             </Text>
           </View>
         </Modal>
@@ -496,7 +505,7 @@ const styles = StyleSheet.create({
   },
   pizzaTypeStyle: {
     marginLeft: width * 0.05,
-    marginBottom: height * 0.03,
+    marginBottom: height * 0.01,
   },
   pizzas: {
     marginLeft: width * 0.05,
