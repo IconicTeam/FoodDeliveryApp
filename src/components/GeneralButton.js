@@ -7,6 +7,8 @@ import {
   Dimensions,
 } from 'react-native';
 
+import {PADDINGS} from '../constants/Constants';
+
 const {width, height} = Dimensions.get('screen');
 class GeneralButton extends Component {
   render() {
@@ -41,6 +43,7 @@ class GeneralButton extends Component {
             },
           ]}>
           <Text
+            numberOfLines={1}
             style={[styles.textTitle2, {color: textColor, fontSize: textSize}]}>
             {title}
           </Text>
@@ -51,11 +54,13 @@ class GeneralButton extends Component {
 }
 const styles = StyleSheet.create({
   generalBtn: {
-    width: width * 0.5,
+    minWidth: width * 0.5,
+    maxWidth: width - 2 * PADDINGS.padding,
     height: height * 0.065,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
+    paddingHorizontal: PADDINGS.padding,
   },
   textTitle2: {
     fontFamily: 'Tajawal',
