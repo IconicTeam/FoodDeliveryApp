@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { AccessibilityInfo, StatusBar } from 'react-native';
+import React, {Component} from 'react';
+import {AccessibilityInfo, StatusBar} from 'react-native';
 import {
   Text,
   View,
@@ -13,6 +13,7 @@ import {
   StyleSheet,
   PermissionsAndroid,
   Pressable,
+  
 } from 'react-native';
 
 // import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
@@ -20,21 +21,22 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import GeneralButton from '../../components/GeneralButton';
 
-import { SIZES, PADDINGS, FONTS } from '../../constants/Constants';
-import { defaultTheme, darkTheme } from '../../constants/Theme';
+import {SIZES, PADDINGS, FONTS} from '../../constants/Constants';
+import {defaultTheme, darkTheme} from '../../constants/Theme';
 
 import ImagePicker from 'react-native-image-crop-picker';
 
 import RBSheet from 'react-native-raw-bottom-sheet';
 
-const { width, height } = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
+
 export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       photo_uri: '',
-      // categories
-      catogires: [
+      // sections
+      sections: [
         {
           id: 1,
           name: 'طلباتي',
@@ -46,47 +48,46 @@ export default class ProfileScreen extends React.Component {
           id: 2,
           name: 'اعدادات الحساب',
           icon1: 'chevron-left',
-          icon2: 'user',
-          screen: '',
+          icon2: 'user-alt',
+          screen: 'ProfileSettingsScreen',
         },
         {
           id: 3,
+          name: 'عنوان التوصيل',
+          icon1: 'chevron-left',
+          icon2: 'map-marker-alt',
+          screen: 'ChangeAddressScreen',
+        },
+        {
+          id: 4,
+          name: 'اعدادات الاشعارات',
+          icon1: 'chevron-left',
+          icon2: 'bell',
+          screen: 'NotificationSettingScreen',
+        },
+        {
+          id: 5,
+          name: 'السمات',
+          icon1: 'chevron-left',
+          icon2: 'palette',
+          screen: 'ChangeThemeScreen',
+        },
+        {
+          id: 6,
           name: 'الدفع',
           icon1: 'chevron-left',
           icon2: 'credit-card',
-          screen: '',
+          screen: 'PaymentScreen',
         },
-        // {
-        //   id: 4,
-        //   name: 'الإشعارات',
-        //   icon1: 'chevron-left',
-        //   icon2: 'bell',
-        // },
-        // {
-        //   id: 5,
-        //   name: 'الإشعارات',
-        //   icon1: 'chevron-left',
-        //   icon2: 'bell',
-        // },
-        // {
-        //   id: 6,
-        //   name: 'الإشعارات',
-        //   icon1: 'chevron-left',
-        //   icon2: 'bell',
-        // },
-        // {
-        //   id: 7,
-        //   name: 'الإشعارات',
-        //   icon1: 'chevron-left',
-        //   icon2: 'bell',
-        // },
-        // {
-        //   id: 8,
-        //   name: 'الإشعارات',
-        //   icon1: 'chevron-left',
-        //   icon2: 'bell',
-        // },
+        {
+          id: 7,
+          name: 'تواصل معنا',
+          icon1: 'chevron-left',
+          icon2: 'mail-bulk',
+          screen: 'ContactUsScreen',
+        },
       ],
+
       tabs: [
         {
           id: 1,
@@ -133,7 +134,7 @@ export default class ProfileScreen extends React.Component {
         }
       }
     }
-    this.setState({ tabs: list });
+    this.setState({tabs: list});
   }
 
   // request camera permission
@@ -178,7 +179,7 @@ export default class ProfileScreen extends React.Component {
     })
       .then(image => {
         // console.log(image);
-        this.setState({ user_image: image.path });
+        this.setState({user_image: image.path});
 
         // close action sheet
         this.RBSheetRef.current.close();
@@ -205,7 +206,7 @@ export default class ProfileScreen extends React.Component {
     })
       .then(image => {
         // console.log(image);
-        this.setState({ user_image: image.path });
+        this.setState({user_image: image.path});
 
         // close action sheet
         this.RBSheetRef.current.close();
@@ -217,7 +218,7 @@ export default class ProfileScreen extends React.Component {
 
   // delete user photo
   deletePhoto = () => {
-    this.setState({ user_image: '' });
+    this.setState({user_image: ''});
 
     // close action sheet
     this.RBSheetRef.current.close();
@@ -235,7 +236,7 @@ export default class ProfileScreen extends React.Component {
             activeOpacity={0.4}
             style={[
               styles.touchableopicty1,
-              { backgroundColor: defaultTheme.white },
+              {backgroundColor: defaultTheme.white},
             ]}>
             <FontAwesome5
               name="sign-out-alt"
@@ -244,48 +245,49 @@ export default class ProfileScreen extends React.Component {
             />
           </TouchableOpacity>
           <Pressable
-            android_ripple={{
-              radius: (width * 0.4) / 2,
-              color: '#ddd',
-              foreground: true,
-            }}
+            // android_ripple={{
+            //   radius: (width * 0.4) / 2,
+            //   color: '#ddd',
+            //   foreground: true,
+            // }}
             style={[
               styles.imageContainer,
-              { backgroundColor: defaultTheme.white },
+              {backgroundColor: defaultTheme.white},
             ]}
-            onPress={() => this.RBSheetRef.current.open()}>
+            // onPress={() => this.RBSheetRef.current.open()}
+          >
             {this.state.user_image === '' ? (
               <FontAwesome5
-                name="camera"
-                size={SIZES.largeIconSize}
+                name="user-alt"
+                size={SIZES.largeIconSize + 30}
                 color={defaultTheme.gray}
               />
             ) : (
               <>
                 <Image
-                  source={{ uri: this.state.user_image }}
+                  source={{uri: this.state.user_image}}
                   // resizeMode="cover"
                   style={styles.selectedUserImage}
                 />
-                <FontAwesome5
-                  style={{ position: 'absolute' }}
+                {/* <FontAwesome5
+                  style={{position: 'absolute'}}
                   name="camera"
                   size={SIZES.mediumIconSize}
                   color={`${defaultTheme.white}40`}
-                />
+                /> */}
               </>
             )}
           </Pressable>
-          <Text style={[styles.text1, { color: defaultTheme.white }]}>
+          <Text style={[styles.text1, {color: defaultTheme.white}]}>
             Youssef Mohamed
           </Text>
         </View>
         <View
-          style={[styles.view2, { backgroundColor: defaultTheme.background }]}>
+          style={[styles.view2, {backgroundColor: defaultTheme.background}]}>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ padding: PADDINGS.padding }}>
-            {this.state.catogires.map((catogery, index) => (
+            contentContainerStyle={{padding: PADDINGS.padding}}>
+            {this.state.sections.map((catogery, index) => (
               <TouchableOpacity
                 style={styles.view3}
                 key={index}
@@ -294,7 +296,7 @@ export default class ProfileScreen extends React.Component {
                 <View
                   style={[
                     styles.touchableopicty2,
-                    { backgroundColor: defaultTheme.whiteGray },
+                    {backgroundColor: defaultTheme.whiteGray},
                   ]}>
                   <FontAwesome5
                     name={catogery.icon2}
@@ -309,7 +311,7 @@ export default class ProfileScreen extends React.Component {
                       borderBottomColor: '#ccc',
                     },
                   ]}>
-                  <Text style={[styles.text3, { color: defaultTheme.text2 }]}>
+                  <Text style={[styles.text3, {color: defaultTheme.text2}]}>
                     {catogery.name}
                   </Text>
                   <FontAwesome5
@@ -339,7 +341,7 @@ export default class ProfileScreen extends React.Component {
         </View> */}
 
         {/* bottom sheet */}
-        <RBSheet
+        {/* <RBSheet
           ref={this.RBSheetRef}
           height={SIZES.bottomSheetHeight}
           animationType="fade"
@@ -362,11 +364,11 @@ export default class ProfileScreen extends React.Component {
           }}>
           <View style={styles.RBSheetContentContainer}>
             <View style={styles.RBSheetTitleView}>
-              <Text style={{ ...styles.RBSheetTitle, color: defaultTheme.text2 }}>
+              <Text style={{...styles.RBSheetTitle, color: defaultTheme.text2}}>
                 تحميل صورة
               </Text>
               <Text
-                style={[styles.RBSheetSubTitle, { color: defaultTheme.gray }]}>
+                style={[styles.RBSheetSubTitle, {color: defaultTheme.gray}]}>
                 قم باختيار الصورة الشخصية
               </Text>
             </View>
@@ -438,7 +440,7 @@ export default class ProfileScreen extends React.Component {
               </TouchableOpacity>
             </View>
           </View>
-        </RBSheet>
+        </RBSheet> */}
       </View>
     );
   }

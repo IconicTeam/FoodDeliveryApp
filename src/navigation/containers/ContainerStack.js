@@ -9,6 +9,12 @@ import RestaurantScreen from '../../screens/home/RestaurantScreen';
 import MealScreen from '../../screens/home/MealScreen';
 import OrderDetailsScreen from '../../screens/profile/OrderDetailsScreen';
 import OrdersScreen from '../../screens/profile/OrdersScreen';
+import ProfileSettingsScreen from '../../screens/profile/ProfileSettingsScreen';
+import ChangeAddressScreen from '../../screens/profile/ChangeAddressScreen';
+import NotificationSettingScreen from '../../screens/profile/NotificationSettingScreen';
+import ChangeThemeScreen from '../../screens/profile/ChangeThemeScreen';
+import PaymentScreen from '../../screens/profile/PaymentScreen';
+import ContactUsScreen from '../../screens/profile/ContactUsScreen';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -29,6 +35,21 @@ class ContainerStack extends Component {
           component={OrderDetailsScreen}
         />
         <Stack.Screen name="OrdersScreen" component={OrdersScreen} />
+        <Stack.Screen
+          name="ProfileSettingsScreen"
+          component={ProfileSettingsScreen}
+        />
+        <Stack.Screen
+          name="ChangeAddressScreen"
+          component={ChangeAddressScreen}
+        />
+        <Stack.Screen
+          name="NotificationSettingScreen"
+          component={NotificationSettingScreen}
+        />
+        <Stack.Screen name="ChangeThemeScreen" component={ChangeThemeScreen} />
+        <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+        <Stack.Screen name="ContactUsScreen" component={ContactUsScreen} />
       </Stack.Navigator>
     );
   }

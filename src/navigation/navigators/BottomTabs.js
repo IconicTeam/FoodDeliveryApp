@@ -62,7 +62,7 @@ const TabBarCustomButton = ({
   }, [selected]);
 
   // && route != 'CartScreen'
-  if (selected) {
+  if (selected && route != 'CartScreen') {
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
         <View
@@ -128,7 +128,7 @@ class BottomTabs extends Component {
       <Tab.Navigator
         tabBarOptions={{
           showLabel: false,
-          keyboardHidesTabBar: true,
+          keyboardHidesTabBar: true, // hide tabBar when keyboard open
           style: {
             ...styles.bttomTabsContainer,
           },
@@ -173,7 +173,7 @@ class BottomTabs extends Component {
               />
             ),
             tabBarButton: props => <TabBarCustomButton {...props} />,
-            // tabBarVisible: false,
+            tabBarVisible: false,
           }}
         />
         <Tab.Screen

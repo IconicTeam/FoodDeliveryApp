@@ -9,6 +9,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Animated,
+  TextInput,
+  Easing,
+  Keyboard,
 } from 'react-native';
 import React, {Component} from 'react';
 
@@ -128,9 +132,110 @@ class Restaurants extends Component {
         },
       ],
 
+      // filtered restaurants
+      filteredRestaurants: [
+        {
+          rest_id: '1',
+          rest_name: 'كوكى',
+          rest_image: '',
+          rest_cover_image:
+            'https://saidaonline.com/new/uploads/news/1200x630/21/07/mcdonaldsglobal.jpg',
+          rest_rate: 4.7,
+          rest_delivery: 'مجانى',
+          rest_delivery_time: '20-30 دقيقة',
+          rest_prices: 1, // 1 => $ | 2 => $$ | 3 => $$$
+          rest_meals: 'برجر - بيتزا - مقبلات',
+        },
+        {
+          rest_id: '2',
+          rest_name: 'أبو محمد',
+          rest_image: '',
+          rest_cover_image:
+            'https://www.eatthis.com/wp-content/uploads/sites/4/media/images/ext/842849976/greasy-fast-food.jpg?quality=82&strip=all',
+          rest_rate: 4.7,
+          rest_delivery: 'مجانى',
+          rest_delivery_time: '15-20 دقيقة',
+          rest_prices: 3, // 1 => $ | 2 => $$ | 3 => $$$
+          rest_meals: 'لحمة - وجبات - مقبلات',
+        },
+        {
+          rest_id: '3',
+          rest_name: 'الخير والبركة',
+          rest_image: '',
+          rest_cover_image:
+            'https://www.lantmannen-unibake.com/globalassets/_global-en/decks--images/f-1140x400---limit-spot-1/1140x400---category----fastfood.jpg',
+          rest_rate: 4.7,
+          rest_delivery: 'مجانى',
+          rest_delivery_time: '25-30 دقيقة',
+          rest_prices: 1, // 1 => $ | 2 => $$ | 3 => $$$
+          rest_meals: 'كبدة - كفتة - مقبلات',
+        },
+        {
+          rest_id: '4',
+          rest_name: 'الشيخ سعيد',
+          rest_image: '',
+          rest_cover_image:
+            'https://vistapointe.net/images/fast-food-wallpaper-9.jpg',
+          rest_rate: 4.7,
+          rest_delivery: 'مجانى',
+          rest_delivery_time: '20-30 دقيقة',
+          rest_prices: 2, // 1 => $ | 2 => $$ | 3 => $$$
+          rest_meals: 'كبدة -كفتة - مقبلات',
+        },
+      ],
+
+      searchValue: '',
       selected_cat_name: '',
+      // searchBtnDisabled: false,
+      // cancelBtnDisabled: false,
     };
+
+    // searchbar animation
+    this.searchbarAnim = new Animated.Value(0);
+    // textinput ref
+    this.inputRef = React.createRef(null);
   }
+
+  // animate searchbar
+  animateSearchbar = () => {
+    Animated.timing(this.searchbarAnim, {
+      toValue: 1,
+      duration: 500,
+      // easing: Easing.quad,
+    }).start(() => {
+      // this.setState({searchBtnDisabled: true, cancelBtnDisabled: false})
+      this.inputRef.current.focus();
+    });
+  };
+
+  // close animation
+  closeAnimateSearchbar = () => {
+    Animated.timing(this.searchbarAnim, {
+      toValue: 0,
+      duration: 500,
+      // easing: Easing.quad,
+    }).start(() => {
+      setTimeout(() => {
+        Keyboard.dismiss();
+        this.inputRef.current.clear();
+        this.applySearch('');
+      }, 5);
+    });
+  };
+
+  applySearch = value => {
+    if (value.length != 0) {
+      const filteredRestaurants = this.state.restaurants.filter(item =>
+        item.rest_name.toUpperCase().includes(value.trim().toUpperCase()),
+      );
+      this.setState({filteredRestaurants, searchValue: value});
+    } else {
+      this.setState({
+        filteredRestaurants: this.state.restaurants,
+        searchValue: value,
+      });
+    }
+  };
 
   // render header
   _renderHeader() {
@@ -159,19 +264,120 @@ class Restaurants extends Component {
         </View>
         {/* search */}
         <View style={[styles.headerIconContainer]}>
-          <Pressable
-            style={[styles.IconBtn]}
-            android_ripple={{
-              color: defaultTheme.ripple,
-              radius: (height * 0.055) / 2,
+          <Animated.View
+            style={{
+              // backgroundColor: 'red',
+              top: this.searchbarAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -(height * 0.085) / 2 + 15],
+              }),
+              opacity: this.searchbarAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0],
+              }),
             }}>
+            <Pressable
+              // disabled={this.state.searchBtnDisabled}
+              style={[styles.IconBtn]}
+              android_ripple={{
+                color: defaultTheme.ripple,
+                radius: (height * 0.055) / 2,
+              }}
+              onPress={this.animateSearchbar}>
+              <Icon
+                name="search"
+                size={SIZES.mediumIconSize}
+                color={defaultTheme.icon}
+              />
+            </Pressable>
+          </Animated.View>
+        </View>
+        <Animated.View
+          style={[
+            styles.searchbarView,
+            {
+              backgroundColor: defaultTheme.card,
+              width: this.searchbarAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, width - 2 * PADDINGS.padding - height * 0.05],
+              }),
+              // height: this.searchbarAnim.interpolate({
+              //   inputRange: [0, 1],
+              //   outputRange: [0, 45],
+              // }),
+              // transform: [{scaleY: this.searchbarAnim}],
+            },
+          ]}>
+          <View style={styles.searchIconView}>
             <Icon
               name="search"
               size={SIZES.mediumIconSize}
               color={defaultTheme.icon}
             />
+          </View>
+          <TextInput
+            ref={this.inputRef}
+            style={[
+              styles.searchbar,
+              {
+                color: defaultTheme.text2,
+              },
+            ]}
+            returnKeyType="search"
+            placeholder="ابحث عن مطاعم"
+            placeholderTextColor={defaultTheme.gray}
+            textAlign="right"
+            selectionColor={defaultTheme.selectionColor}
+            value={this.state.searchValue}
+            onChangeText={value => this.applySearch(value)}
+          />
+          <TouchableOpacity
+            style={styles.searchIconView}
+            activeOpacity={0.4}
+            onPress={() => {
+              this.inputRef.current.clear();
+              this.applySearch('');
+            }}>
+            <Icon
+              name="close"
+              size={SIZES.mediumIconSize}
+              color={defaultTheme.icon}
+            />
+          </TouchableOpacity>
+        </Animated.View>
+        <Animated.View
+          style={{
+            ...styles.cancelBtnView,
+            bottom: this.searchbarAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [
+                -(height * 0.085) / 2 + 15,
+                (height * 0.085) / 2 - 15,
+              ],
+            }),
+            opacity: this.searchbarAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 1],
+            }),
+            // transform: [
+            //   {
+            //     translateY: this.searchbarAnim.interpolate({
+            //       inputRange: [0, 1],
+            //       outputRange: [0, -45],
+            //     }),
+            //   },
+            // ],
+          }}>
+          <Pressable
+            // disabled={this.state.cancelBtnDisabled}
+            style={styles.cancelBtn}
+            android_ripple={{color: defaultTheme.ripple}}
+            onPress={this.closeAnimateSearchbar}>
+            <Text style={[styles.cancelBtnText, {color: defaultTheme.primary}]}>
+              إالغاء
+            </Text>
           </Pressable>
-        </View>
+        </Animated.View>
       </View>
     );
   }
@@ -197,7 +403,10 @@ class Restaurants extends Component {
           </Text>
         </View>
         <View style={{width: width}}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView
+            horizontal
+            keyboardShouldPersistTaps="handled"
+            showsHorizontalScrollIndicator={false}>
             <View style={[styles.categoriesContainer]}>
               {this.state.categories.map((item, index) => {
                 return (
@@ -264,7 +473,7 @@ class Restaurants extends Component {
         item.rest_meals.includes(this.state.selected_cat_name),
       );
     } else {
-      filteredRestaurants = this.state.restaurants;
+      filteredRestaurants = this.state.filteredRestaurants;
     }
 
     return (
@@ -277,6 +486,7 @@ class Restaurants extends Component {
         {/* <ScrollView style={{flex: 1}}> */}
         <View style={{width: width, flex: 1}}>
           <FlatList
+            keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.flatListContainer}
             data={filteredRestaurants}
@@ -461,6 +671,50 @@ const styles = StyleSheet.create({
     // backgroundColor: '#00f',
   },
   restuarantDetails: {
+    fontSize: SIZES.smallFontSize,
+    fontFamily: FONTS.fontFamily,
+  },
+  searchbarView: {
+    // width: width - 2 * PADDINGS.padding - height * 0.05,
+    height: 45,
+    borderRadius: 5,
+    flexDirection: 'row',
+    overflow: 'hidden',
+    elevation: 3,
+    position: 'absolute',
+    left: PADDINGS.padding,
+  },
+  searchIconView: {
+    width: '14%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  searchbar: {
+    width: '72%',
+    height: '100%',
+    padding: 0,
+    margin: 0,
+    fontSize: SIZES.smallFontSize,
+    fontFamily: FONTS.fontFamily,
+  },
+  cancelBtn: {
+    width: height * 0.055,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // backgroundColor: 'red',
+  },
+  cancelBtnView: {
+    width: height * 0.055,
+    height: 30,
+    position: 'absolute',
+    alignSelf: 'center',
+    right: (height * 0.055) / 2 - PADDINGS.padding,
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  cancelBtnText: {
     fontSize: SIZES.smallFontSize,
     fontFamily: FONTS.fontFamily,
   },

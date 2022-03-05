@@ -316,7 +316,7 @@ class SignupScreen extends Component {
   };
 
   // signup
-  signup = (name, email, pass, confirm_pass, location) => {
+  signup = (email, pass, confirm_pass) => {
     alert(`${email}\n${pass}\n${confirm_pass}`);
   };
 
@@ -325,8 +325,10 @@ class SignupScreen extends Component {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(value.trim()) == false && value.trim().length != 0) {
       this.setState({email_err: 'برجاء إدخال بريد الكترونى صحيح!'});
+      return false;
     } else {
       this.setState({email_err: '', user_email: value});
+      return true;
     }
   };
 
@@ -334,8 +336,10 @@ class SignupScreen extends Component {
     // password
     if (value.trim().length < 6 && value.trim().length != 0) {
       this.setState({pass_err: 'يجب تكون كلمة السر أكبر من أو تساوى 6 أحرف!'});
+      return false;
     } else {
       this.setState({pass_err: '', user_password: value});
+      return true;
     }
   };
 
@@ -345,9 +349,24 @@ class SignupScreen extends Component {
       this.setState({
         confirm_pass_err: 'كلمة السر غير متطابقة!',
       });
+      return false;
     } else {
       this.setState({confirm_pass_err: '', user_confirm_password: value});
+      return true;
     }
+  };
+
+  onChangeEmail = value => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    return reg.test(value.trim());
+  };
+
+  onChangePassword = value => {
+    return value.trim().length >= 6;
+  };
+
+  onChangeConfirmPassword = value => {
+    return value.trim() == this.state.user_password;
   };
 
   render() {
@@ -499,6 +518,9 @@ class SignupScreen extends Component {
                   value={user_email}
                   onChangeText={value => {
                     this.setState({user_email: value});
+                    if (this.onChangeEmail(value)) {
+                      this.setState({email_err: ''});
+                    }
                   }}
                   selectionColor={defaultTheme.selectionColor}
                   underlineColor={defaultTheme.black}
@@ -531,6 +553,9 @@ class SignupScreen extends Component {
                     value={user_password}
                     onChangeText={value => {
                       this.setState({user_password: value});
+                      if (this.onChangePassword(value)) {
+                        this.setState({pass_err: ''});
+                      }
                     }}
                     selectionColor={defaultTheme.selectionColor}
                     underlineColor={defaultTheme.black}
@@ -545,6 +570,7 @@ class SignupScreen extends Component {
                   />
                   <TouchableOpacity
                     style={[styles.showPassBtn]}
+                    activeOpacity={activeOpacity}
                     onPress={this.handleVisiblePass}>
                     <Icon
                       name={passSecureTextEntry ? 'eye-slash' : 'eye'}
@@ -578,6 +604,9 @@ class SignupScreen extends Component {
                     value={user_confirm_password}
                     onChangeText={value => {
                       this.setState({user_confirm_password: value});
+                      if (this.onChangeConfirmPassword(value)) {
+                        this.setState({confirm_pass_err: ''});
+                      }
                     }}
                     selectionColor={defaultTheme.selectionColor}
                     underlineColor={defaultTheme.black}
@@ -592,6 +621,7 @@ class SignupScreen extends Component {
                   />
                   <TouchableOpacity
                     style={[styles.showPassBtn]}
+                    activeOpacity={activeOpacity}
                     onPress={this.handleVisibleConfirmPass}>
                     <Icon
                       name={confirmPassSecureTextEntry ? 'eye-slash' : 'eye'}
@@ -614,18 +644,17 @@ class SignupScreen extends Component {
               </View>
               {/* location */}
               <View style={{marginBottom: PADDINGS.padding}}>
-                <TouchableOpacity
+                <View
                   style={[styles.textInputWithIcon]}
-                  activeOpacity={activeOpacity}
-                  onPress={() => this.getCurrentPosition()}>
+                  // activeOpacity={activeOpacity}
+                  // onPress={() => this.getCurrentPosition()}
+                >
                   <TextInput
-                    editable={false}
+                    // editable={false}
                     style={[
-                      // styles.textInputStyle,
+                      styles.textInputStyle,
                       {
                         backgroundColor: defaultTheme.card,
-                        minHeight: height * 0.065,
-                        width: '100%',
                       },
                     ]}
                     label={'العنوان الافتراضى'}
@@ -636,12 +665,15 @@ class SignupScreen extends Component {
                     selectionColor={defaultTheme.selectionColor}
                     underlineColor={defaultTheme.black}
                     activeUnderlineColor={defaultTheme.primary}
-                    multiline
+                    // multiline
                   />
-                  <View style={[styles.locationBtn]}>
+                  <TouchableOpacity
+                    style={[styles.locationBtn]}
+                    activeOpacity={activeOpacity}
+                    onPress={() => this.getCurrentPosition()}>
                     <Icon name={'map-marker-alt'} size={SIZES.smallIconSize} />
-                  </View>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                </View>
                 {confirm_pass_err.length != 0 && (
                   <View style={[styles.errorContainer]}>
                     <Text style={[styles.errText, {color: defaultTheme.error}]}>
@@ -870,7 +902,7 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     width: '100%',
-    height: height * 0.065,
+    height: 50,
     borderRadius: 5,
     overflow: 'hidden',
     textAlign: 'right',
@@ -1005,6 +1037,7 @@ const styles = StyleSheet.create({
     width: width * 0.3,
     height: width * 0.3,
     // borderRadius: height / 2,
+    borderRadius: (width * 0.3) / 2,
   },
   RBSheetSubTitle: {
     fontSize: SIZES.mediumFontSize,

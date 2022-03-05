@@ -340,6 +340,7 @@ class FavoritesScreen extends Component {
                             <View
                               style={{
                                 flexDirection: 'row',
+                                alignItems: 'center',
                               }}>
                               <View
                                 style={{
