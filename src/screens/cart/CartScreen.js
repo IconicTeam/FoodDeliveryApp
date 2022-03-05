@@ -1,348 +1,211 @@
-import * as React from 'react';
+import React, {Component} from 'react';
 import {
+  Dimensions,
+  StyleSheet,
   Text,
   View,
   TouchableOpacity,
   Image,
-  ScrollView,
-  Dimensions,
-  StyleSheet,
 } from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {SIZES, PADDINGS, FONTS} from '../../constants/Constants';
+import {PADDINGS, SIZES} from '../../constants/Constants';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {defaultTheme} from '../../constants/Theme';
-import GeneralButton from '../../components/GeneralButton';
 
 const {width, height} = Dimensions.get('screen');
-
-export default class Cart extends React.Component {
+export class CartScreen extends Component {
   constructor() {
     super();
     this.state = {
-      Cart_arr: [
+      orders: [
         {
-          product_name: 'البرجر',
-
-          product_arr: [
-            {
-              name: 'برجر حار نار',
-              count: 1,
-              price: 100,
-              image: require('../../assets/images/burger.png'),
-            },
-            {
-              name: 'برجر حار نار',
-              count: 1,
-              price: 100,
-              image: require('../../assets/images/burger-king-veggie-burger-11562993225drer5ymmrx.png'),
-            },
-            {
-              name: 'برجر حار نار',
-              count: 1,
-              price: 100,
-              image: require('../../assets/images/123.jpg'),
-            },
-          ],
+          mealName: 'برجر لحمة',
+          price: 100,
+          image: require('../../assets/images/burger.png'),
         },
         {
-          product_name: 'البيتزا',
-
-          product_arr: [
-            {
-              name: 'بيتزا مارجيريتا',
-              count: 1,
-              price: 50,
-              image: require('../../assets/images/pizza.png'),
-            },
-            {
-              name: 'بيتزا لحوم',
-              count: 1,
-              price: 150,
-              image: require('../../assets/images/pizzaMeal.png'),
-            },
-          ],
+          mealName: 'برجر فراخ',
+          price: 50,
+          image: require('../../assets/images/burger.png'),
+        },
+        {
+          mealName: ' بيتزا جمبري',
+          price: 120,
+          image: require('../../assets/images/pizzaShrimp.png'),
+        },
+        {
+          mealName: 'بيتزا',
+          price: 100,
+          image: require('../../assets/images/pizzaMeal.png'),
         },
       ],
-
-      sumOfItem: 100,
     };
   }
-
-  delete() {
-    let item = this.state.Cart_arr;
-    var length = item.length;
-    item.splice(0, length);
-    total = 0;
-
-    this.setState({
-      Cart_arr: item,
-      sumOfItem: total,
-    });
-  }
-
-  min(index) {
-    let item = this.state.Cart_arr;
-    if (item[index].product_arr[index].count > 1) {
-      item[index].product_arr[index].count--;
-
-      // total = item[index].product_arr[index].count * item[index].product_arr[index].price;
-    }
-
-    this.setState({
-      Cart_arr: item,
-      // sumOfItem: total,
-    });
-  }
-
-  plus(index, product_index) {
-    let item = this.state.Cart_arr;
-    if (item[index].product_arr[product_index].count >= 1) {
-      item[index].product_arr[product_index].count++;
-
-      // total = item[index].product_arr[index].count * item[index].product_arr[index].price;
-    }
-
-    this.setState({
-      Cart_arr: item,
-      // sumOfItem: total,
-    });
-  }
-
-  // total() {
-  //     let item = this.state.Cart_arr
-  //     let total = this.state.sumOfItem
-  //     for (let i = 0; i < item.length; i++) {
-  //         total = item[i].count * item[i].price
-  //     }
-  //     this.setState({
-  //         sumOfItem: total,
-  //         Cart_arr: item
-  //     })
-  // }
-
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          padding: PADDINGS.padding,
-        }}>
+      <View style={styles.container}>
+        <View style={styles.headerStyle}>
+          <TouchableOpacity
+            activeOpacity={0.4}
+            style={styles.TouchableOpacityStyle}>
+            <Icon
+              name="chevron-right"
+              size={SIZES.mediumIconSize}
+              color={defaultTheme.icon}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.deleteTextStyle}>
+            <Text style={styles.textStyle}>مسح</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{width: width * 0.6, marginBottom: PADDINGS.largePadding}}>
+          <Text
+            style={[
+              styles.textStyle,
+              {color: '#000', fontSize: SIZES.largeFontSize},
+            ]}>
+            2 وجبة في السلة 19 جنية
+          </Text>
+        </View>
+        <View style={styles.ViewlineStyle}>
+          <Text style={[styles.textStyle, {color: '#aaa'}]}>الوجبات</Text>
+        </View>
+        {this.state.orders.map((item, index) => {
+          return (
+            <View style={styles.mealStyle}>
+              <View style={styles.ViewMealContainer}>
+                <View style={styles.imageMealStyle}>
+                  <Image
+                    resizeMode="cover"
+                    style={{width: '100%', height: '100%'}}
+                    source={item.image}
+                  />
+                </View>
+                <View style={styles.mealTextStyle}>
+                  <Text style={styles.textMealNameStyle}>{item.mealName}</Text>
+                  <Text style={styles.priceTextStyle}>{item.price}جنية</Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'space-around',
+                }}>
+                <TouchableOpacity>
+                  <AntDesign name="delete" size={20} color={'#000'} />
+                </TouchableOpacity>
+                <View style={styles.plusMinusViewStyle}>
+                  <TouchableOpacity style={styles.plusMinusButtonStyle}>
+                    <Icon name="plus" size={15} color={'#000'} />
+                  </TouchableOpacity>
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        fontFamily: 'Tajawal',
+                        color: '#000',
+                      }}>
+                      1
+                    </Text>
+                  </View>
+                  <TouchableOpacity style={styles.plusMinusButtonStyle}>
+                    <Icon name="minus" size={15} color={'#000'} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          );
+        })}
+        <View style={[styles.ViewlineStyle]} />
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: PADDINGS.padding,
-            // backgroundColor: '#f00',
           }}>
-          {/* <TouchableOpacity
-            style={{
-              width: height * 0.054,
-              height: height * 0.054,
-              alignItems: 'center',
-              justifyContent: 'center',
-              elevation: 1,
-              borderRadius: 15,
-              alignSelf: 'flex-start',
-              backgroundColor: defaultTheme.white,
-            }}>
-            <FontAwesome5 name="chevron-right" size={SIZES.mediumIconSize} />
-          </TouchableOpacity> */}
-
-          <Text style={[styles.title, {color: defaultTheme.text2}]}>السلة</Text>
-
-          <TouchableOpacity
-            activeOpacity={0.4}
-            onPress={() => {
-              this.delete();
-            }}>
-            <Text
-              style={{
-                fontFamily: 'Tajawal',
-                fontSize: SIZES.smallFontSize,
-                color: defaultTheme.primary,
-              }}>
-              حذف الكل
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* <View
-          style={{
-            alignItems: "flex-start",
-            justifyContent: 'center',
-          }}>
-          <Text
-            style={{
-              fontSize: SIZES.largeFontSize,
-              fontFamily: 'Tajawal',
-              color: defaultTheme.text2
-            }}>
-            {this.state.Cart_arr.length} من الطلبات فى السله يساوى {this.state.sumOfItem}$
-          </Text>
-        </View> */}
-
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {this.state.Cart_arr.map((item, index) => (
-            <View>
-              <View
-                style={{
-                  alignItems: 'flex-start',
-                  justifyContent: 'center',
-                  borderBottomWidth: 1,
-                  borderColor: defaultTheme.gray,
-                }}>
-                <Text
-                  style={{
-                    fontSize: SIZES.mediumFontSize,
-                    fontFamily: 'Tajawal',
-                    marginBottom: PADDINGS.smallPadding,
-                    marginTop: PADDINGS.padding,
-                  }}>
-                  محل {item.product_name}
-                </Text>
-              </View>
-              {this.state.Cart_arr[index].product_arr.map(
-                (item, product_index) => (
-                  <View
-                    style={{
-                      marginTop: PADDINGS.padding,
-                      flexDirection: 'row',
-                      width: '100%',
-                      height: 100,
-                      justifyContent: 'space-between',
-                      // backgroundColor: defaultTheme.white,
-                      borderRadius: 20,
-                      alignSelf: 'center',
-                    }}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        width: '50%',
-                        justifyContent: 'space-between',
-                      }}>
-                      <View
-                        style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
-                        <Image
-                          source={item.image}
-                          style={{
-                            width: 80,
-                            height: 80,
-                            backgroundColor: defaultTheme.border,
-                          }}
-                          borderRadius={20}
-                        />
-                      </View>
-                      <View
-                        style={{
-                          justifyContent: 'center',
-                          alignItems: 'flex-start',
-                          marginHorizontal: PADDINGS.smallPadding,
-                        }}>
-                        <Text
-                          style={{
-                            fontFamily: 'Tajawal',
-                            fontSize: SIZES.mediumFontSize,
-                          }}>
-                          {item.name}
-                        </Text>
-                        <Text
-                          style={{
-                            fontFamily: 'Tajawal',
-                            fontSize: SIZES.mediumFontSize,
-                          }}>
-                          السعر: {item.price}$
-                        </Text>
-                      </View>
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-around',
-                        width: '35%',
-                      }}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          this.plus(product_index);
-                        }}
-                        style={{
-                          borderWidth: 1,
-                          borderRadius: 15,
-                          width: 35,
-                          height: 35,
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          backgroundColor: defaultTheme.border,
-                          borderColor: defaultTheme.border,
-                        }}>
-                        <FontAwesome5 name="plus" size={SIZES.smallIconSize} />
-                      </TouchableOpacity>
-                      <View>
-                        <Text
-                          style={{
-                            fontFamily: 'Tajawal',
-                            fontSize: SIZES.mediumFontSize,
-                            color: defaultTheme.text2,
-                          }}>
-                          {item.count}
-                        </Text>
-                      </View>
-                      <TouchableOpacity
-                        disabled={item.count == 1}
-                        onPress={() => {
-                          this.min(product_index);
-                        }}
-                        style={{
-                          borderWidth: 1,
-                          borderRadius: 15,
-                          width: 35,
-                          height: 35,
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          backgroundColor: defaultTheme.border,
-                          borderColor: defaultTheme.border,
-                        }}>
-                        <FontAwesome5 name="minus" size={SIZES.smallIconSize} />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                ),
-              )}
-            </View>
-          ))}
-        </ScrollView>
-
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginVertical: PADDINGS.largePadding,
-          }}>
-          <GeneralButton
-            title={'الطلب مقابل  ' + this.state.sumOfItem + '$'}
-            BGcolor={defaultTheme.primary}
-            // width={width * 0.5}
-            // height={height * 0.065}
-            textColor={defaultTheme.white}
-            textSize={SIZES.mediumFontSize}
-            haveBorder={false}
-            otherStyles={{
-              alignSelf: 'center',
-            }}
-          />
+          <Text style={[styles.textStyle, {color: '#000'}]}>التوصيل</Text>
+          <Text style={[styles.textStyle]}>مجانا</Text>
         </View>
       </View>
     );
   }
 }
-
 const styles = StyleSheet.create({
-  title: {
-    fontSize: SIZES.largeFontSize,
-    fontFamily: FONTS.fontFamily,
+  container: {
+    flex: 1,
+    padding: PADDINGS.padding,
+  },
+  headerStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: PADDINGS.largePadding,
+  },
+  TouchableOpacityStyle: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+    backgroundColor: defaultTheme.card,
+    elevation: 2,
+  },
+  deleteTextStyle: {
+    marginTop: 5,
+  },
+  textStyle: {
+    fontSize: SIZES.mediumFontSize,
+    color: '#fb6e3b',
+    fontFamily: 'Tajawal',
+  },
+  ViewlineStyle: {
+    borderBottomWidth: 2,
+    height: height * 0.05,
+    borderBottomColor: '#ddd',
+    marginBottom: PADDINGS.largePadding,
+  },
+  mealStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: PADDINGS.padding,
+  },
+  imageMealStyle: {
+    width: width * 0.2,
+    height: height * 0.09,
+    backgroundColor: '#ddd',
+    borderRadius: 10,
+  },
+  ViewMealContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  mealTextStyle: {
+    marginLeft: PADDINGS.smallPadding,
+  },
+  textMealNameStyle: {
+    fontSize: SIZES.mediumFontSize,
+    fontFamily: 'Tajawal',
+    color: '#000',
+  },
+  priceTextStyle: {
+    fontSize: SIZES.smallFontSize,
+    fontFamily: 'Tajawal',
+    color: '#aaa',
+  },
+  plusMinusViewStyle: {
+    flexDirection: 'row',
+    width: width * 0.25,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  plusMinusButtonStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: width * 0.08,
+    height: height * 0.035,
+    backgroundColor: '#eee',
+    borderRadius: 15,
+    elevation: 2,
   },
 });
+export default CartScreen;
