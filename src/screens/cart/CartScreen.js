@@ -81,12 +81,50 @@ export class CartScreen extends Component {
                     source={item.image}
                   />
                 </View>
-                <View style={styles.mealTextStyle}>
-                  <Text style={styles.textMealNameStyle}>{item.mealName}</Text>
-                  <Text style={styles.priceTextStyle}>{item.price}جنية</Text>
+                <View
+                  style={{
+                    flexDirection: 'column',
+                  }}>
+                  <View style={styles.mealTextStyle}>
+                    <View>
+                      <Text style={styles.textMealNameStyle}>
+                        {item.mealName}
+                      </Text>
+                    </View>
+                    <TouchableOpacity>
+                      <AntDesign name="delete" size={20} color={'#000'} />
+                    </TouchableOpacity>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      width: width * 0.72,
+                      justifyContent: 'space-between',
+                    }}>
+                    <Text style={styles.priceTextStyle}>{item.price}جنية</Text>
+                    <View style={styles.plusMinusViewStyle}>
+                      <TouchableOpacity style={styles.plusMinusButtonStyle}>
+                        <Icon name="plus" size={15} color={'#000'} />
+                      </TouchableOpacity>
+                      <View>
+                        <Text
+                          style={{
+                            fontSize: 20,
+                            fontFamily: 'Tajawal',
+                            color: '#000',
+                          }}>
+                          1
+                        </Text>
+                      </View>
+                      <TouchableOpacity style={styles.plusMinusButtonStyle}>
+                        <Icon name="minus" size={15} color={'#000'} />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
                 </View>
               </View>
-              <View
+              {/* <Text style={styles.priceTextStyle}>{item.price}جنية</Text> */}
+              {/* <View
                 style={{
                   alignItems: 'center',
                   justifyContent: 'space-around',
@@ -94,7 +132,7 @@ export class CartScreen extends Component {
                 <TouchableOpacity>
                   <AntDesign name="delete" size={20} color={'#000'} />
                 </TouchableOpacity>
-                <View style={styles.plusMinusViewStyle}>
+                {/* <View style={styles.plusMinusViewStyle}>
                   <TouchableOpacity style={styles.plusMinusButtonStyle}>
                     <Icon name="plus" size={15} color={'#000'} />
                   </TouchableOpacity>
@@ -111,8 +149,8 @@ export class CartScreen extends Component {
                   <TouchableOpacity style={styles.plusMinusButtonStyle}>
                     <Icon name="minus" size={15} color={'#000'} />
                   </TouchableOpacity>
-                </View>
-              </View>
+                </View> 
+                    </View> */}
             </View>
           );
         })}
@@ -181,6 +219,10 @@ const styles = StyleSheet.create({
   },
   mealTextStyle: {
     marginLeft: PADDINGS.smallPadding,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: width * 0.68,
+    alignItems: 'center',
   },
   textMealNameStyle: {
     fontSize: SIZES.mediumFontSize,
@@ -191,6 +233,8 @@ const styles = StyleSheet.create({
     fontSize: SIZES.smallFontSize,
     fontFamily: 'Tajawal',
     color: '#aaa',
+
+    marginLeft: PADDINGS.smallPadding,
   },
   plusMinusViewStyle: {
     flexDirection: 'row',
