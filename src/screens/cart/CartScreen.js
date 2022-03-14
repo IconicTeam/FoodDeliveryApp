@@ -233,7 +233,6 @@ const styles = StyleSheet.create({
     fontSize: SIZES.smallFontSize,
     fontFamily: 'Tajawal',
     color: '#aaa',
-
     marginLeft: PADDINGS.smallPadding,
   },
   plusMinusViewStyle: {
