@@ -9,6 +9,7 @@ import {
   Image,
   Alert,
   Modal,
+  StatusBar,
 } from 'react-native';
 import React, {Component} from 'react';
 
@@ -101,6 +102,11 @@ export class MealScreen extends Component {
     return (
       <View
         style={[styles.container, {backgroundColor: defaultTheme.background}]}>
+        <StatusBar
+          backgroundColor={defaultTheme.background}
+          barStyle="dark-content"
+          translucent={false}
+        />
         <ScrollView
           contentContainerStyle={{paddingBottom: height * 0.1}}
           showsVerticalScrollIndicator={false}>
@@ -385,10 +391,10 @@ const styles = StyleSheet.create({
   },
   viewImage1: {
     width: width * 0.6,
-    height: height * 0.25,
+    height: height * 0.3,
     alignItems: 'center',
     alignSelf: 'center',
-    marginTop: PADDINGS.padding,
+    marginTop: PADDINGS.largePadding * 2,
   },
   imageBG: {
     width: '100%',
@@ -410,19 +416,21 @@ const styles = StyleSheet.create({
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: height * 0.03,
+    marginBottom: PADDINGS.largePadding,
+    marginTop: PADDINGS.padding,
+    // backgroundColor: '#f00',
   },
   text1: {
     fontFamily: 'Tajawal',
     color: '#000',
     fontSize: SIZES.largeFontSize,
-    marginBottom: height * 0.01,
+    marginBottom: PADDINGS.smallPadding,
   },
   text2: {
     fontFamily: 'Tajawal',
     width: width * 0.8,
     textAlign: 'center',
-    color: '#bbb',
+    color: 'gray',
     fontSize: SIZES.smallFontSize,
   },
   view4: {

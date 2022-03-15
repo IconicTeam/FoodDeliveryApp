@@ -278,7 +278,7 @@ export default class RestaurantScreen extends React.Component {
           pressIn1: false,
         },
       ],
-      seletedName: '',
+      selectedName: '',
 
       restaurant: {
         ...this.props.route.params.restaurant,
@@ -295,20 +295,20 @@ export default class RestaurantScreen extends React.Component {
   search(item) {
     let list = this.state.products;
 
-    if (this.state.seletedName == item) {
+    if (this.state.selectedName == item) {
       for (let j = 0; j < list.length; j++) {
         list[j].show = true;
       }
-      this.setState({seletedName: ''});
+      this.setState({selectedName: ''});
     } else {
       for (let i = 0; i < list.length; i++) {
-        if (list[i].name.toLowerCase().includes(item.toLowerCase())) {
+        if (list[i].meal_name.toLowerCase().includes(item.toLowerCase())) {
           list[i].show = true;
         } else {
           list[i].show = false;
         }
       }
-      this.setState({seletedName: item});
+      this.setState({selectedName: item});
     }
 
     this.setState({products: list});
@@ -378,7 +378,7 @@ export default class RestaurantScreen extends React.Component {
             <Text style={styles.text1}> المأكولات</Text>
           </View>
           <View style={styles.view3}>
-            <TouchableOpacity style={styles.view4}>
+            <View style={styles.view4}>
               <FontAwesome5
                 name="motorcycle"
                 style={{marginRight: 4}}
@@ -386,8 +386,8 @@ export default class RestaurantScreen extends React.Component {
                 size={SIZES.smallIconSize}
               />
               <Text style={styles.text2}>مجاني</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.view4}>
+            </View>
+            <View style={styles.view4}>
               <FontAwesome5
                 name="clock"
                 style={{marginRight: 4}}
@@ -395,8 +395,8 @@ export default class RestaurantScreen extends React.Component {
                 size={SIZES.smallIconSize}
               />
               <Text style={styles.text2}>25-30 دقيقة</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.view4}>
+            </View>
+            <View style={styles.view4}>
               <FontAwesome5
                 name="star"
                 style={{marginRight: 4}}
@@ -404,7 +404,7 @@ export default class RestaurantScreen extends React.Component {
                 size={SIZES.smallIconSize}
               />
               <Text style={styles.text2}>تقييم</Text>
-            </TouchableOpacity>
+            </View>
           </View>
           <View style={styles.view5}>
             <ScrollView
